@@ -388,3 +388,71 @@ h1, h2, h3, .avatar-name, .avatar-title, .rank-step b, .gender-toggle span { fon
 .bottom-nav a.active .nav-icon { color: #d8b4ff; filter: drop-shadow(0 0 10px #b875ff); }
 @media (max-width: 900px) { .avatar-select-layout, .avatar-preview { grid-template-columns: 1fr; } .avatar-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } .avatar-preview .rank-frame { grid-row: auto; } }
 @media (max-width: 520px) { .avatar-cards { grid-template-columns: 1fr; } .rpg-avatar-card .avatar-figure { height: 220px; } .rank-steps { grid-template-columns: repeat(6, 144px); } }
+
+/* Exact-reference inspired premium avatar selection refinements */
+.onboarding { overflow-x: hidden; padding-bottom: calc(116px + env(safe-area-inset-bottom)); }
+.avatar-field legend { font-family: var(--font-display); font-size: clamp(1.35rem, 5vw, 2rem); color: #f6eddf; text-transform: uppercase; }
+.avatar-field legend + .avatar-select::before { content: 'Your journey begins here. This is your legend.'; color: #aeb0bd; margin-top: -10px; }
+.rpg-avatar-card input:checked + span::after { content: '✓'; position: absolute; top: 10px; right: 10px; z-index: 5; width: 28px; height: 28px; display: grid; place-items: center; border-radius: 50%; color: white; font-weight: 950; background: linear-gradient(135deg, #8d55ff, #c29cff); box-shadow: 0 0 18px rgba(184,117,255,.75); }
+.rpg-avatar-card span { position: relative; }
+.avatar-preview .generate-button, .select-avatar-inline { width: 100%; margin-top: 8px; }
+.avatar-gladiator { --scene-a: rgba(255,154,74,.35); --scene-b: rgba(91,32,20,.72); }
+.avatar-shadow { --scene-a: rgba(125,75,255,.32); --scene-b: rgba(3,5,12,.86); }
+.avatar-berserker { --scene-a: rgba(255,69,58,.42); --scene-b: rgba(60,10,8,.86); }
+.avatar-paladin { --scene-a: rgba(255,224,138,.38); --scene-b: rgba(28,39,55,.82); }
+.avatar-voidwalker { --scene-a: rgba(184,117,255,.46); --scene-b: rgba(13,5,28,.9); }
+.avatar-ranger { --scene-a: rgba(81,213,138,.34); --scene-b: rgba(9,31,24,.86); }
+.avatar-female.avatar-gladiator { --accent-a:#ffdf91; --accent-b:#9d273c; }
+.avatar-female.avatar-shadow { --accent-a:#c5a3ff; --accent-b:#242842; }
+.avatar-female.avatar-berserker { --accent-a:#ff875f; --accent-b:#6e1010; }
+.avatar-female.avatar-paladin { --accent-a:#fff0b7; --accent-b:#5f7da8; }
+.avatar-female.avatar-voidwalker { --accent-a:#e099ff; --accent-b:#2d145d; }
+.avatar-female.avatar-ranger { --accent-a:#7dffcf; --accent-b:#315b43; }
+.avatar-figure { background: linear-gradient(180deg, rgba(255,240,199,.16), transparent 26%), radial-gradient(circle at 50% 25%, var(--scene-a, color-mix(in srgb, var(--accent-a) 25%, transparent)), transparent 28%), linear-gradient(180deg, var(--scene-b, #191821), #05060b 74%); }
+.avatar-scene { background: linear-gradient(90deg, rgba(255,255,255,.075) 1px, transparent 1px) 15% 0/42px 100%, linear-gradient(135deg, transparent 0 40%, rgba(255,255,255,.08) 41% 42%, transparent 43%), radial-gradient(circle at 50% 100%, rgba(255,142,55,.28), transparent 32%); }
+.avatar-gladiator .avatar-head::before { content:''; position:absolute; inset:-55% -75% auto; height:80%; border-radius:50% 50% 0 0; background: repeating-linear-gradient(90deg, #7a1c1c 0 4px, #211 4px 8px); filter: drop-shadow(0 0 8px #000); }
+.avatar-shadow .avatar-head { border-radius: 46% 46% 10% 10%; box-shadow: 0 -18px 0 10px rgba(0,0,0,.44); }
+.avatar-paladin .avatar-head { border-color: #fff0bf; }
+.avatar-voidwalker .avatar-sparks { opacity: .85; background: radial-gradient(circle at 18% 22%, #b875ff 0 3px, transparent 4px), radial-gradient(circle at 78% 42%, #8d55ff 0 2px, transparent 3px), radial-gradient(circle at 50% 76%, #d9b3ff 0 2px, transparent 3px); }
+.avatar-berserker .avatar-shoulders { clip-path: polygon(0 100%, 13% 10%, 38% 36%, 50% 0, 62% 36%, 87% 10%, 100% 100%); }
+.avatar-ranger .avatar-cape { width: 62%; opacity: .62; }
+.rank-novice .avatar-body { filter: saturate(.72) brightness(.78); width: 42%; }
+.rank-adventurer .avatar-body { filter: saturate(.95); }
+.rank-champion .avatar-body { filter: saturate(1.18) brightness(1.05); }
+.rank-veteran .avatar-body, .rank-mythic .avatar-body, .rank-legend .avatar-body { filter: saturate(1.35) brightness(1.08); }
+.mini-frame.rank-novice .avatar-figure { --scene-a: rgba(81,213,138,.28); --scene-b: rgba(9,45,34,.86); }
+.mini-frame.rank-adventurer .avatar-figure { --scene-a: rgba(91,199,255,.28); --scene-b: rgba(10,30,50,.88); }
+.mini-frame.rank-champion .avatar-figure { --scene-a: rgba(154,101,255,.35); --scene-b: rgba(18,10,48,.9); }
+.mini-frame.rank-veteran .avatar-figure { --scene-a: rgba(255,157,66,.36); --scene-b: rgba(55,26,8,.9); }
+.mini-frame.rank-mythic .avatar-figure { --scene-a: rgba(255,69,58,.42); --scene-b: rgba(54,6,8,.92); }
+.mini-frame.rank-legend .avatar-figure { --scene-a: rgba(255,211,106,.48); --scene-b: rgba(58,39,9,.9); }
+.rank-step { overflow: hidden; }
+.rank-step::after { content: ''; width: 34px; height: 34px; justify-self: center; border-radius: 50%; background: radial-gradient(circle, var(--rank-tint, #ffe08a), transparent 62%); filter: drop-shadow(0 0 12px var(--rank-tint, #ffe08a)); }
+@media (max-width: 620px) {
+  .onboarding { padding: 10px 8px calc(116px + env(safe-area-inset-bottom)); }
+  .onboarding-card { min-height: auto; padding: 14px; border-radius: 18px; }
+  .avatar-select-layout { grid-template-columns: 1fr; gap: 12px; }
+  .avatar-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .rpg-avatar-card span { min-height: 214px; border-radius: 14px; }
+  .rpg-avatar-card .avatar-figure { height: 158px; min-height: 158px; }
+  .rpg-avatar-card .avatar-name { font-size: .88rem; margin-top: -42px; }
+  .rpg-avatar-card small { font-size: .68rem; line-height: 1.2; }
+  .avatar-preview { grid-template-columns: 1fr; padding: 14px; border-radius: 18px; }
+  .avatar-preview .rank-frame { width: 100%; max-width: 340px; }
+  .stat-bars label { grid-template-columns: 92px 1fr; font-size: .78rem; }
+  .stat-bars label > span:last-child { display: none; }
+  .stat-bars .progress { grid-column: 2; }
+  .hero-preview-card { grid-template-columns: 92px 1fr; padding: 12px; }
+  .avatar-preview.compact .rank-frame { width: 78px; }
+  .hero-preview-card dl { grid-template-columns: 1fr; gap: 6px; }
+  .rank-evolution { padding: 12px; margin-inline: -2px; }
+  .rank-steps { grid-template-columns: repeat(6, minmax(126px, 1fr)); gap: 8px; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; }
+  .rank-step { min-width: 126px; scroll-snap-align: start; padding: 8px; }
+  .mini-frame { min-height: 166px; }
+  .bottom-nav { bottom: max(8px, env(safe-area-inset-bottom)); width: calc(100% - 16px); }
+}
+@media (max-width: 360px) {
+  .avatar-cards { gap: 8px; }
+  .rpg-avatar-card span { min-height: 196px; }
+  .rpg-avatar-card .avatar-figure { height: 146px; min-height: 146px; }
+}
