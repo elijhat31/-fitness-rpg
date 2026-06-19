@@ -125,3 +125,19 @@ button:disabled, .complete-button:disabled { cursor: not-allowed; opacity: .45; 
 @keyframes sparkleDrop { from { opacity: .45; transform: translateY(-4px); } to { opacity: 1; transform: translateY(4px); } }
 @keyframes chestPop { 0% { opacity: 0; transform: scale(.35) rotate(-8deg); } 70% { transform: scale(1.08) rotate(3deg); } 100% { opacity: 1; transform: scale(1) rotate(0); } }
 @media (max-width: 620px) { .rare-grid { grid-template-columns: 1fr; } }
+
+/* Production hardening: keep dense RPG panels usable on small screens. */
+img, svg { max-width: 100%; }
+button, input, select { max-width: 100%; }
+button { touch-action: manipulation; }
+@media (max-width: 620px) {
+  body { overflow-x: hidden; }
+  .top-hero { position: static; }
+  .hero-actions { width: 100%; }
+  .hero-actions button { width: 100%; }
+  .avatar { width: 76px; height: 76px; font-size: 2.75rem; border-radius: 22px; }
+  .day-tab, .quest, .shop-item, .complete-button, .generate-button, .ghost-button { min-height: 44px; }
+  .exercise-row { display: grid; grid-template-columns: auto minmax(0, 1fr); }
+  .exercise-row .xp-pill { grid-column: 2; justify-self: start; white-space: normal; }
+  .loot-row b { overflow-wrap: anywhere; }
+}
