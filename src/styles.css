@@ -227,3 +227,34 @@ input:focus, select:focus { border-color: rgba(125,255,207,.7) !important; box-s
 .workout-card.soft-rpg { background: linear-gradient(135deg, rgba(255, 122, 217, .34), rgba(91, 53, 145, .42), rgba(17, 23, 45, .86)); border-color: rgba(255, 194, 237, .36); }
 .soft-rpg-mode .exercise-row.done { border-color: rgba(255,122,217,.52); background: rgba(255,122,217,.1); }
 .soft-rpg-mode input:focus, .soft-rpg-mode select:focus { border-color: rgba(255,122,217,.7) !important; box-shadow: 0 0 0 4px rgba(255,122,217,.12); }
+
+/* Premium icon system and mature avatar cards */
+.ui-icon, .stat-icon, .inline-icon, .feature-icon, .nav-icon, .avatar-mark { display: inline-block; flex: 0 0 auto; vertical-align: middle; }
+.stat-icon { width: 18px; height: 18px; margin-right: 7px; color: #7dffcf; }
+.inline-icon { width: 18px; height: 18px; margin-right: 7px; color: #7dffcf; }
+.feature-icon { width: 34px; height: 34px; color: #ffe08a; filter: drop-shadow(0 10px 20px rgba(249,199,93,.22)); }
+.nav-icon { width: 22px; height: 22px; }
+.avatar { font-size: 1rem; background: radial-gradient(circle at 30% 20%, rgba(255,255,255,.35), transparent 28%), linear-gradient(145deg, #27314f, #14192d 55%, #0b1020); border-color: rgba(125,255,207,.55); box-shadow: 0 18px 45px rgba(0,0,0,.35), 0 0 35px rgba(125,255,207,.18); }
+.avatar-figure { width: 100%; height: 100%; min-width: 58px; min-height: 58px; display: grid; place-items: center; position: relative; border-radius: inherit; overflow: hidden; background: linear-gradient(160deg, rgba(125,255,207,.16), rgba(249,199,93,.08)); }
+.avatar-head { width: 22%; aspect-ratio: 1; border-radius: 999px; background: linear-gradient(135deg, #f9d49d, #b8795d); position: absolute; top: 18%; box-shadow: 0 0 0 5px rgba(255,255,255,.08); }
+.avatar-body { width: 54%; height: 46%; border-radius: 45% 45% 18% 18%; position: absolute; bottom: 12%; display: grid; place-items: center; background: linear-gradient(160deg, #7dffcf, #4e7dff); box-shadow: inset 0 1px 0 rgba(255,255,255,.45), 0 14px 26px rgba(0,0,0,.24); }
+.avatar-mark { width: 45%; height: 45%; color: rgba(8, 13, 25, .82); }
+.avatar-name { display: block; margin-top: 7px; font-size: .72rem; line-height: 1.1; color: #d7caee; font-weight: 900; text-align: center; }
+.avatar-choice span { width: 104px; height: 104px; padding: 10px; font-size: 1rem; border-radius: 22px; background: linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.035)); }
+.avatar-choice span .avatar-figure { width: 58px; height: 58px; margin: 0 auto; border-radius: 18px; }
+.avatar-trailblazer .avatar-body, .avatar-runner .avatar-body { background: linear-gradient(160deg, #7dffcf, #12b8ff); }
+.avatar-striker .avatar-body, .avatar-phoenix .avatar-body { background: linear-gradient(160deg, #ffe08a, #ff6b42); }
+.avatar-shadow .avatar-body, .avatar-onyx .avatar-body { background: linear-gradient(160deg, #b875ff, #2c335c); }
+.avatar-sentinel .avatar-body, .avatar-crystalGolem .avatar-body { background: linear-gradient(160deg, #80a7ff, #7dffcf); }
+.avatar-tactician .avatar-body, .avatar-cosmicKnight .avatar-body { background: linear-gradient(160deg, #d6e4ff, #6c5cff); }
+.avatar-nova .avatar-body, .avatar-pulse .avatar-body, .avatar-apex .avatar-body, .avatar-lunar .avatar-body, .avatar-regal .avatar-body { background: linear-gradient(160deg, #ffd1f0, #b875ff); }
+.badge, .login-day, .challenge, .shop-item, .quest, .rare-avatar { background: linear-gradient(180deg, rgba(255,255,255,.075), rgba(255,255,255,.028)); border-color: rgba(255,255,255,.13); }
+.badge span, .login-day span, .shop-item span, .rare-avatar span { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 16px; background: rgba(125,255,207,.08); border: 1px solid rgba(125,255,207,.18); margin-bottom: 8px; }
+.shop-item { grid-template-columns: 56px 1fr; align-items: center; }
+.shop-item span { grid-row: span 2; margin: 0; }
+.login-day span { margin-bottom: 6px; }
+.chest-pop span { width: 76px; height: 76px; display: grid; place-items: center; border-radius: 24px; background: rgba(255,255,255,.1); }
+.bottom-nav a span { font-size: 0; line-height: 1; }
+.bottom-nav a:first-child .nav-icon { color: #271400; }
+.onboarding-grid legend { color: #ffe08a; font-weight: 950; letter-spacing: .08em; text-transform: uppercase; }
+@media (max-width: 620px) { .avatar-choice span { width: 92px; height: 98px; } .feature-icon { width: 30px; height: 30px; } }
