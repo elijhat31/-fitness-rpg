@@ -199,3 +199,31 @@ input:focus, select:focus { border-color: rgba(125,255,207,.7) !important; box-s
   .side-panel { display: grid; gap: 12px; }
   .panel, .stats-page, .history-card { margin-top: 12px; }
 }
+
+/* Female-focused and color-theme customization */
+.theme-pink, .theme-purple, .soft-rpg-mode {
+  --soft-accent: #ff7ad9;
+  --soft-accent-2: #b875ff;
+  --soft-panel: rgba(39, 19, 55, .9);
+}
+.theme-pink body, body:has(.theme-pink) { background: radial-gradient(circle at top left, rgba(255,122,217,.34) 0, transparent 30%), radial-gradient(circle at bottom right, rgba(184,117,255,.28) 0, transparent 26%), linear-gradient(135deg, #1a0d25 0%, #3a164a 58%, #171126 100%); }
+.theme-purple body, body:has(.theme-purple) { background: radial-gradient(circle at top left, rgba(184,117,255,.34) 0, transparent 30%), radial-gradient(circle at bottom right, rgba(255,122,217,.2) 0, transparent 26%), linear-gradient(135deg, #130b25 0%, #2d1858 58%, #0d1024 100%); }
+.theme-dark { color-scheme: dark; }
+.theme-dark .hero-card, .theme-dark .weekly-page, .theme-dark .history-card, .theme-dark .panel, .theme-dark .loot-modal, .theme-dark .stats-page { background: rgba(8, 9, 18, .94); border-color: rgba(255,255,255,.16); }
+.soft-rpg-mode .hero-card, .soft-rpg-mode .weekly-page, .soft-rpg-mode .history-card, .soft-rpg-mode .panel, .soft-rpg-mode .loot-modal, .soft-rpg-mode .stats-page {
+  border-color: rgba(255, 122, 217, .34);
+  background: linear-gradient(145deg, rgba(44, 21, 68, .92), rgba(23, 17, 43, .88));
+  box-shadow: 0 24px 80px rgba(255, 122, 217, .14), inset 0 0 30px rgba(184, 117, 255, .08);
+}
+.soft-rpg-mode .avatar, .soft-rpg-mode .generate-button, .soft-rpg-mode .complete-button, .soft-rpg-mode .bottom-nav a:first-child {
+  background: linear-gradient(135deg, #ffd1f0, #ff7ad9 48%, #b875ff);
+  box-shadow: 0 12px 30px rgba(255, 122, 217, .28);
+}
+.soft-rpg-mode .generate-button, .soft-rpg-mode .complete-button, .soft-rpg-mode .bottom-nav a:first-child { color: #2a0a25; }
+.soft-rpg-mode .eyebrow, .soft-rpg-mode .stat-card span:first-child { color: #ffc2ed; }
+.soft-rpg-mode .stat-card strong, .soft-rpg-mode .day-tab span, .soft-rpg-mode .day-tab em, .soft-rpg-mode .rank-track b { color: #f8a7ff; }
+.soft-rpg-mode .progress span { background: linear-gradient(90deg, #ff7ad9, #b875ff, #ffd1f0); box-shadow: 0 0 20px rgba(255, 122, 217, .55); }
+.soft-rpg-mode .day-tab.active, .soft-rpg-mode .avatar-choice input:checked + span { border-color: #ff7ad9; box-shadow: 0 0 0 2px rgba(255, 122, 217, .2); }
+.workout-card.soft-rpg { background: linear-gradient(135deg, rgba(255, 122, 217, .34), rgba(91, 53, 145, .42), rgba(17, 23, 45, .86)); border-color: rgba(255, 194, 237, .36); }
+.soft-rpg-mode .exercise-row.done { border-color: rgba(255,122,217,.52); background: rgba(255,122,217,.1); }
+.soft-rpg-mode input:focus, .soft-rpg-mode select:focus { border-color: rgba(255,122,217,.7) !important; box-shadow: 0 0 0 4px rgba(255,122,217,.12); }
