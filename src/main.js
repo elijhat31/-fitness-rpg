@@ -72,6 +72,11 @@ const LEVELS = {
 const AVATARS = ['gladiator', 'shadow', 'berserker', 'paladin', 'voidwalker', 'ranger'];
 const THEME_AVATARS = ['nova', 'pulse', 'apex', 'onyx', 'lunar', 'regal'];
 const CLASSES = ['Gladiator', 'Shadow', 'Berserker', 'Paladin', 'Voidwalker', 'Ranger'];
+const AVATAR_GENDERS = ['male', 'female'];
+const AVATAR_IMAGE_DATA = Object.fromEntries(AVATAR_GENDERS.flatMap((gender) => AVATARS.flatMap((avatar) => RANKS.map((rank) => {
+  const path = `/avatars/${gender}/${avatar}-${rank.id}.jpg`;
+  return [`${gender}:${avatar}:${rank.id}`, { gender, avatar, rank: rank.id, path }];
+}))));
 const AVATAR_ARCHETYPES = {
   gladiator: { name: 'Gladiator', focus: 'Strength', icon: 'shield', desc: 'Heavy arena armor, shield discipline, and relentless strength training.', stats: { Strength: 96, Endurance: 70, Agility: 45, Recovery: 52, Focus: 64 }, accents: ['#ffd36a', '#b32222'] },
   shadow: { name: 'Shadow', focus: 'Agility + Endurance', icon: 'swords', desc: 'Hooded rogue armor built for speed, stamina, and controlled movement.', stats: { Strength: 52, Endurance: 82, Agility: 96, Recovery: 56, Focus: 78 }, accents: ['#8f5bff', '#111827'] },
@@ -452,7 +457,22 @@ const AVATAR_ALIASES = { vanguard: 'gladiator', trailblazer: 'ranger', striker: 
 function avatarId(value) { return AVATAR_ALIASES[LEGACY_AVATAR_MAP[value] || value] || LEGACY_AVATAR_MAP[value] || value || 'paladin'; }
 function avatarMeta(value) { return AVATAR_ARCHETYPES[avatarId(value)] || AVATAR_ARCHETYPES.paladin; }
 function rankClass(s = state) { return `rank-${currentRankMeta(s).id}`; }
-function avatarCard(value, label = '', opts = {}) { const id = avatarId(value); const meta = avatarMeta(id); const gender = opts.gender || state.character?.gender || state.profile?.genderStyle || 'male'; const rank = opts.rank || currentRankMeta(); return `<div class="avatar-figure avatar-${id} avatar-${gender} rank-${rank.id}" style="--accent-a:${meta.accents[0]};--accent-b:${meta.accents[1]};--rank-glow:${rank.glow}"><div class="avatar-scene"></div><div class="avatar-aura"></div><div class="avatar-cape"></div><div class="avatar-head"></div><div class="avatar-shoulders"></div><div class="avatar-body">${icon(meta.icon, 'avatar-mark')}</div><div class="avatar-weapon"></div><div class="avatar-sparks"></div></div>${label ? `<span class="avatar-name">${escapeHtml(label === true ? meta.name : label)}</span>` : ''}`; }
+function avatarGender(value) { return value === 'female' ? 'female' : 'male'; }
+function avatarImagePath(value, opts = {}) {
+  const id = avatarId(value);
+  const gender = avatarGender(opts.gender || state.character?.gender || state.profile?.genderStyle || 'male');
+  const rank = opts.rank || currentRankMeta();
+  return AVATAR_IMAGE_DATA[`${gender}:${id}:${rank.id}`]?.path || `/avatars/${gender}/${id}-${rank.id}.jpg`;
+}
+function avatarCard(value, label = '', opts = {}) {
+  const id = avatarId(value);
+  const meta = avatarMeta(id);
+  const gender = avatarGender(opts.gender || state.character?.gender || state.profile?.genderStyle || 'male');
+  const rank = opts.rank || currentRankMeta();
+  const imagePath = avatarImagePath(id, { gender, rank });
+  const alt = `${gender} ${meta.name} ${rank.name} avatar`;
+  return `<figure class="avatar-figure avatar-image-card avatar-${id} avatar-${gender} rank-${rank.id}" data-avatar-src="${imagePath}"><img class="avatar-image" src="${imagePath}" alt="${escapeHtml(alt)}" loading="lazy" onerror="this.closest('.avatar-figure').classList.add('is-missing')"><figcaption class="avatar-missing"><b>Avatar image missing</b><small>${escapeHtml(imagePath)}</small></figcaption></figure>${label ? `<span class="avatar-name">${escapeHtml(label === true ? meta.name : label)}</span>` : ''}`;
+}
 function StatBars(stats = {}) { return `<div class="stat-bars">${Object.entries(stats).map(([name, value]) => `<label><span>${escapeHtml(name)}</span><b>${value}</b>${progressBar(value)}</label>`).join('')}</div>`; }
 function AvatarPreview({ avatar = state.character.avatar, gender = state.character.gender || state.profile.genderStyle || 'male', compact = false } = {}) { const meta = avatarMeta(avatar); return `<article class="avatar-preview ${compact ? 'compact' : ''}"><div class="rank-frame ${rankClass()}">${avatarCard(avatar, '', { gender })}</div><p class="avatar-title">${currentRank()} ${meta.name}</p><h3>${escapeHtml(meta.name)}</h3><p>${escapeHtml(meta.desc)}</p><small>Fitness focus: ${escapeHtml(meta.focus)}</small>${compact ? '' : StatBars(meta.stats)}</article>`; }
 function AvatarSelect(selected = state.character.avatar, gender = state.character.gender || state.profile.stylePreference || 'male') { const chosen = avatarId(selected); return `<section class="avatar-select"><div class="gender-toggle" role="radiogroup" aria-label="Avatar gender"><label><input type="radio" name="avatarGender" value="male" ${gender !== 'female' ? 'checked' : ''}><span>Male</span></label><label><input type="radio" name="avatarGender" value="female" ${gender === 'female' ? 'checked' : ''}><span>Female</span></label></div><div class="avatar-select-layout"><div class="avatar-cards">${AVATARS.map((a, i) => { const meta = avatarMeta(a); return `<label class="avatar-choice rpg-avatar-card"><input type="radio" name="avatar" value="${a}" ${chosen === a || (!chosen && i === 0) ? 'checked' : ''}/><span>${avatarCard(a, true, { gender })}<small>${escapeHtml(meta.focus)}</small></span></label>`; }).join('')}</div>${AvatarPreview({ avatar: chosen, gender })}</div></section>`; }

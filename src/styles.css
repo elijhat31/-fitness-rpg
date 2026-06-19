@@ -456,3 +456,53 @@ h1, h2, h3, .avatar-name, .avatar-title, .rank-step b, .gender-toggle span { fon
   .rpg-avatar-card span { min-height: 196px; }
   .rpg-avatar-card .avatar-figure { height: 146px; min-height: 146px; }
 }
+
+/* Image-based avatar system: all avatar render points use real files under public/avatars. */
+.avatar-image-card {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-width: 58px;
+  min-height: 58px;
+  margin: 0;
+  overflow: hidden;
+  border-radius: inherit;
+  background: #05060b;
+}
+.avatar-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+.avatar-missing {
+  position: absolute;
+  inset: 0;
+  display: none;
+  place-content: center;
+  gap: 8px;
+  padding: 12px;
+  color: #fff1c2;
+  text-align: center;
+  background: #05060b;
+  border: 1px solid rgba(255, 224, 138, .24);
+}
+.avatar-missing b { font-size: clamp(.78rem, 2.4vw, 1rem); text-transform: uppercase; letter-spacing: .08em; }
+.avatar-missing small { color: #aeb0bd; font-size: .68rem; overflow-wrap: anywhere; }
+.avatar-image-card.is-missing .avatar-image { display: none; }
+.avatar-image-card.is-missing .avatar-missing { display: grid; }
+.avatar .avatar-image-card { border-radius: inherit; }
+.avatar-preview .rank-frame { aspect-ratio: 3 / 4; overflow: hidden; }
+.avatar-preview.compact .rank-frame { aspect-ratio: 3 / 4; }
+.rank-frame, .mini-frame { overflow: hidden; }
+.rank-frame .avatar-image-card, .mini-frame .avatar-image-card { min-height: 100%; }
+.rpg-avatar-card .avatar-image-card { width: 100%; height: 178px; min-height: 178px; border-radius: 0; }
+.rpg-avatar-card .avatar-name { pointer-events: none; }
+@media (max-width: 520px) { .rpg-avatar-card .avatar-image-card { height: 220px; min-height: 220px; } }
+@media (max-width: 620px) {
+  .rpg-avatar-card .avatar-image-card { height: 158px; min-height: 158px; }
+  .avatar-preview .rank-frame { aspect-ratio: 3 / 4; }
+}
+@media (max-width: 360px) { .rpg-avatar-card .avatar-image-card { height: 146px; min-height: 146px; } }
