@@ -335,3 +335,56 @@ input:focus, select:focus { border-color: rgba(125,255,207,.7) !important; box-s
   .dragon-image { min-height: 138px; }
   .stat-card strong { font-size: 1.25rem; }
 }
+
+/* Cinematic fantasy character-select overhaul */
+:root { --font-display: Georgia, 'Times New Roman', serif; }
+body { background: radial-gradient(circle at 50% -10%, rgba(122,77,255,.24), transparent 32%), radial-gradient(circle at 92% 12%, rgba(255,183,74,.14), transparent 24%), linear-gradient(180deg, #03050b, #090812 48%, #040407); }
+h1, h2, h3, .avatar-name, .avatar-title, .rank-step b, .gender-toggle span { font-family: var(--font-display); letter-spacing: .035em; text-transform: uppercase; }
+.onboarding-card { width: min(1180px, 100%); background: linear-gradient(155deg, rgba(8,10,18,.96), rgba(12,8,22,.94)); border: 1px solid rgba(167,130,255,.24); box-shadow: 0 0 0 1px rgba(255,255,255,.04), 0 30px 100px rgba(0,0,0,.72), inset 0 0 80px rgba(126,87,255,.08); }
+.avatar-select-layout { grid-template-columns: minmax(360px, 1fr) minmax(360px, .95fr); }
+.avatar-cards { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.gender-toggle { max-width: 520px; border-radius: 14px; background: rgba(7,9,17,.76); }
+.gender-toggle span { border-radius: 12px; font-size: 1.03rem; color: #aaa1b8; }
+.gender-toggle input:checked + span { color: #fff8df; background: radial-gradient(circle at 50% 100%, rgba(255,255,255,.3), transparent 8%), linear-gradient(180deg, rgba(125,75,255,.42), rgba(17,12,31,.72)); border: 1px solid rgba(185,112,255,.55); box-shadow: 0 0 26px rgba(160,92,255,.55), inset 0 1px 0 rgba(255,255,255,.18); }
+.rpg-avatar-card span { min-height: 246px; justify-items: stretch; padding: 0; overflow: hidden; border: 1px solid rgba(145,154,178,.28); background: linear-gradient(180deg, rgba(17,21,34,.92), rgba(5,7,13,.98)); box-shadow: inset 0 1px 0 rgba(255,255,255,.08), 0 18px 35px rgba(0,0,0,.36); }
+.rpg-avatar-card .avatar-figure { width: 100%; height: 178px; border-radius: 0; margin: 0; min-height: 178px; }
+.rpg-avatar-card .avatar-name { margin: -48px 10px 0; z-index: 2; color: #fff8ee; font-size: 1rem; text-shadow: 0 2px 12px #000; }
+.rpg-avatar-card small { z-index: 2; margin: 0 10px 12px; color: #b9b0c8; font-size: .76rem; }
+.rpg-avatar-card input:checked + span { border-color: rgba(183,112,255,.95); box-shadow: 0 0 0 1px rgba(255,255,255,.08), 0 0 28px rgba(165,94,255,.72), 0 22px 52px rgba(0,0,0,.5); }
+.avatar-preview { display: grid; grid-template-columns: minmax(220px, 1.15fr) minmax(180px, .85fr); text-align: left; gap: 20px; align-items: center; padding: 20px; background: linear-gradient(135deg, rgba(9,12,20,.96), rgba(5,7,13,.98)); }
+.avatar-preview .rank-frame { grid-row: 1 / span 5; width: min(360px, 100%); }
+.avatar-preview h3 { margin: 0; color: #ff4868; font-size: clamp(2rem, 4vw, 3rem); }
+.avatar-preview p:not(.avatar-title) { color: #d7d0dc; line-height: 1.55; }
+.avatar-preview small { color: #fff8df; font-weight: 900; text-transform: uppercase; }
+.rank-frame { border-color: rgba(160,168,190,.34); background: linear-gradient(145deg, rgba(255,255,255,.08), rgba(122,77,255,.17)); box-shadow: 0 0 34px rgba(141,83,255,.38), inset 0 0 40px rgba(0,0,0,.45); }
+.avatar-figure { background: linear-gradient(180deg, rgba(255,240,199,.18), transparent 30%), radial-gradient(circle at 52% 32%, color-mix(in srgb, var(--accent-a) 25%, transparent), transparent 26%), linear-gradient(180deg, #1c1b20, #07070d 72%); }
+.avatar-scene { position:absolute; inset:0; background: linear-gradient(90deg, rgba(255,255,255,.08) 1px, transparent 1px) 15% 0/48px 100%, radial-gradient(circle at 50% 100%, rgba(255,142,55,.28), transparent 30%); opacity:.55; }
+.avatar-cape { width: 82%; height: 72%; bottom: 0; }
+.avatar-head { top: 13%; width: 20%; border-radius: 48% 48% 30% 30%; background: linear-gradient(135deg, #161922, #05060a); border: 2px solid color-mix(in srgb, var(--accent-a) 48%, #d8d0c2); }
+.avatar-head::after { content:''; position:absolute; inset: 28% 14% auto; height: 16%; background: color-mix(in srgb, var(--accent-a) 80%, white); box-shadow: 0 0 14px var(--accent-a); }
+.avatar-shoulders { bottom: 37%; height: 21%; width: calc(66% + var(--rank-glow) * 3%); background: linear-gradient(135deg, #d8d2bd, var(--accent-a) 35%, #20202a 56%, var(--accent-b)); clip-path: polygon(8% 28%, 28% 0, 72% 0, 92% 28%, 100% 100%, 0 100%); }
+.avatar-body { height: 46%; width: calc(46% + var(--rank-glow) * 2%); background: linear-gradient(160deg, #e9dfbd, var(--accent-a) 20%, #1a1b24 48%, var(--accent-b)); border: 1px solid rgba(255,255,255,.2); }
+.avatar-sparks { position:absolute; inset:0; background: radial-gradient(circle at 18% 20%, var(--accent-a) 0 2px, transparent 3px), radial-gradient(circle at 76% 52%, var(--accent-b) 0 2px, transparent 3px), radial-gradient(circle at 58% 82%, #ffd36a 0 1px, transparent 2px); filter: drop-shadow(0 0 8px var(--accent-a)); opacity: calc(.22 + var(--rank-glow) * .09); }
+.rank-veteran .avatar-head::before, .rank-mythic .avatar-head::before, .rank-legend .avatar-head::before { content:''; position:absolute; inset: -45% -45% auto; height: 70%; background: linear-gradient(135deg, transparent 35%, var(--accent-a) 36% 42%, transparent 43% 57%, var(--accent-a) 58% 64%, transparent 65%); filter: drop-shadow(0 0 10px var(--accent-a)); }
+.rank-legend .avatar-figure::after, .rank-mythic .avatar-figure::after { content:''; position:absolute; top:24%; left:8%; right:8%; height:42%; background: radial-gradient(ellipse, rgba(255,216,113,.55), transparent 56%); filter: blur(7px); z-index:1; }
+.stat-bars label { grid-template-columns: 116px 28px 1fr; align-items: center; }
+.stat-bars .progress { grid-column: 3; height: 10px; margin: 0; background: repeating-linear-gradient(90deg, rgba(255,255,255,.12) 0 10px, rgba(255,255,255,.04) 10px 14px); }
+.stat-bars .progress span { background: linear-gradient(90deg, #ff4262, #8d55ff, #ffd36a); }
+.hero-preview-card { background: linear-gradient(135deg, rgba(20,13,38,.92), rgba(5,8,16,.96)); border-color: rgba(176,126,255,.25); }
+.hero-preview-card .rank-frame { box-shadow: 0 0 28px rgba(161,93,255,.46); }
+.rank-evolution { text-align:center; background: linear-gradient(180deg, rgba(4,6,12,.96), rgba(9,8,16,.94)); }
+.rank-evolution h2 { margin-bottom: 2px; }
+.rank-steps { grid-template-columns: repeat(6, minmax(128px, 1fr)); overflow-x: auto; padding-bottom: 6px; }
+.rank-step { min-width: 128px; display: grid; gap: 6px; background: linear-gradient(180deg, rgba(255,255,255,.055), rgba(0,0,0,.24)); }
+.rank-step b { color: #ffe08a; font-size: 1.05rem; }
+.rank-step small { color: #eee2ff; }
+.rank-step ul { margin: 2px 0 0; padding-left: 16px; text-align: left; color: #c9c1d1; font-size: .74rem; line-height: 1.45; }
+.mini-frame { order: 3; min-height: 190px; }
+.rank-novice { --rank-tint:#51d58a; } .rank-adventurer { --rank-tint:#5bc7ff; } .rank-champion { --rank-tint:#9a65ff; } .rank-veteran { --rank-tint:#ff9d42; } .rank-mythic { --rank-tint:#ff453a; } .rank-legend { --rank-tint:#ffd36a; }
+.rank-step:has(.rank-novice), .mini-frame.rank-novice { border-color: rgba(81,213,138,.34); } .rank-step:has(.rank-adventurer), .mini-frame.rank-adventurer { border-color: rgba(91,199,255,.34); } .rank-step:has(.rank-champion), .mini-frame.rank-champion { border-color: rgba(154,101,255,.42); } .rank-step:has(.rank-veteran), .mini-frame.rank-veteran { border-color: rgba(255,157,66,.44); } .rank-step:has(.rank-mythic), .mini-frame.rank-mythic { border-color: rgba(255,69,58,.44); } .rank-step:has(.rank-legend), .mini-frame.rank-legend { border-color: rgba(255,211,106,.55); }
+.bottom-nav { grid-template-columns: repeat(5, 1fr); width: min(760px, calc(100% - 28px)); padding: 12px; border-radius: 18px; background: rgba(7,8,16,.88); border-color: rgba(161,143,199,.18); }
+.bottom-nav a:first-child { color: #d7caee; background: transparent; box-shadow: none; }
+.bottom-nav a.active { color: #fff; background: radial-gradient(circle at 50% 10%, rgba(188,130,255,.42), transparent 58%); box-shadow: 0 0 24px rgba(170,104,255,.36); }
+.bottom-nav a.active .nav-icon { color: #d8b4ff; filter: drop-shadow(0 0 10px #b875ff); }
+@media (max-width: 900px) { .avatar-select-layout, .avatar-preview { grid-template-columns: 1fr; } .avatar-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } .avatar-preview .rank-frame { grid-row: auto; } }
+@media (max-width: 520px) { .avatar-cards { grid-template-columns: 1fr; } .rpg-avatar-card .avatar-figure { height: 220px; } .rank-steps { grid-template-columns: repeat(6, 144px); } }
