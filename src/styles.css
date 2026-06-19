@@ -141,3 +141,61 @@ button { touch-action: manipulation; }
   .exercise-row .xp-pill { grid-column: 2; justify-self: start; white-space: normal; }
   .loot-row b { overflow-wrap: anywhere; }
 }
+
+/* Production mobile app shell */
+html { min-height: 100%; background: #100b1f; scroll-behavior: smooth; }
+body { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; color: #f7edcf; }
+body::before { content: ''; position: fixed; inset: 0; pointer-events: none; background: linear-gradient(180deg, rgba(255,255,255,.08), transparent 22%), radial-gradient(circle at 50% -10%, rgba(255,224,138,.18), transparent 34%); z-index: -1; }
+input, select, button { min-height: 48px; }
+input, select { outline: none; }
+input:focus, select:focus { border-color: rgba(125,255,207,.7) !important; box-shadow: 0 0 0 4px rgba(125,255,207,.12); }
+.app-shell { padding-bottom: calc(102px + env(safe-area-inset-bottom)); }
+.top-hero::after, .weekly-page::after, .stats-page::after, .panel::after, .onboarding-card::after { content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; background: linear-gradient(135deg, rgba(255,255,255,.14), transparent 28%, transparent 72%, rgba(125,255,207,.08)); opacity: .75; }
+.hero-card, .weekly-page, .history-card, .panel, .loot-modal, .stats-page, .workout-card, .stat-card, .onboarding-card { position: relative; overflow: hidden; }
+.hero-card > *, .weekly-page > *, .history-card > *, .panel > *, .stats-page > *, .workout-card > *, .stat-card > *, .onboarding-card > * { position: relative; z-index: 1; }
+.stat-card { min-height: 116px; display: grid; align-content: space-between; box-shadow: inset 0 1px 0 rgba(255,255,255,.1); }
+.stat-card span:first-child { font-weight: 950; letter-spacing: .04em; text-transform: uppercase; color: #ffe08a; }
+.stat-card span:first-child::first-letter { font-size: 1.2em; }
+.day-tab, .quest, .shop-item, .badge, .login-day, .challenge, .rare-avatar { box-shadow: inset 0 1px 0 rgba(255,255,255,.08), 0 10px 28px rgba(0,0,0,.18); }
+.day-tab { display: grid; align-content: space-between; }
+.workout-card h2 { font-size: clamp(1.6rem, 7vw, 2.7rem); }
+.complete-button, .generate-button, .ghost-button { min-height: 52px; font-size: 1rem; letter-spacing: .01em; }
+.complete-button, .generate-button { border-bottom: 4px solid rgba(110,55,0,.35); }
+.exercise-row { min-height: 76px; }
+.exercise-row input { min-width: 28px; width: 28px; height: 28px; }
+.bottom-nav { position: fixed; left: 50%; bottom: max(12px, env(safe-area-inset-bottom)); transform: translateX(-50%); width: min(430px, calc(100% - 24px)); z-index: 20; display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; padding: 8px; border: 1px solid rgba(255,255,255,.14); border-radius: 26px; background: rgba(15, 11, 31, .86); box-shadow: 0 18px 55px rgba(0,0,0,.42), inset 0 1px 0 rgba(255,255,255,.1); backdrop-filter: blur(18px); }
+.bottom-nav a { min-height: 54px; display: grid; place-items: center; gap: 1px; text-decoration: none; color: #d7caee; border-radius: 20px; font-size: .72rem; font-weight: 900; }
+.bottom-nav a span { font-size: 1.35rem; line-height: 1; }
+.bottom-nav a:first-child { color: #271400; background: linear-gradient(135deg, #ffe08a, #ff9d42); box-shadow: 0 8px 22px rgba(255,157,66,.26); }
+.onboarding { width: 100%; min-height: 100svh; padding: 18px; background: radial-gradient(circle at 50% 0, rgba(255,224,138,.16), transparent 35%); }
+.onboarding-card { min-height: calc(100svh - 36px); display: grid; align-content: center; width: min(520px, 100%); padding: clamp(22px, 6vw, 36px); }
+.onboarding-card h1 { font-size: clamp(2.4rem, 12vw, 4.2rem); }
+.onboarding-grid { grid-template-columns: 1fr; }
+.onboarding-grid label { color: #fff1c2; }
+.onboarding-grid input, .onboarding-grid select { min-height: 54px; font-size: 16px; }
+.onboarding-grid fieldset { padding: 14px; }
+.onboarding-grid .generate-button { width: 100%; min-height: 58px; font-size: 1.08rem; }
+@media (min-width: 760px) { .onboarding-card { width: min(980px, 100%); } .onboarding-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 620px) {
+  .app-shell { width: 100%; padding: 12px 12px calc(108px + env(safe-area-inset-bottom)); }
+  .hero-card, .weekly-page, .history-card, .workout-card, .panel, .loot-modal, .stats-page { border-radius: 26px; }
+  .top-hero { margin-bottom: 12px; padding: 18px; background: linear-gradient(160deg, rgba(44,28,85,.96), rgba(14,25,43,.94)); }
+  .top-hero .character { width: 100%; flex-direction: row; align-items: center; gap: 14px; }
+  .top-hero h1 { font-size: clamp(1.8rem, 9vw, 2.5rem); }
+  .top-hero p:not(.eyebrow), .top-hero small { display: none; }
+  .rank-track { max-width: 100%; }
+  .hero-actions { display: grid; grid-template-columns: 1fr 1fr; }
+  .hero-actions button { padding-inline: 10px; font-size: .84rem; }
+  .dashboard { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; overflow: visible; }
+  .stat-card { min-height: 104px; padding: 14px; border-radius: 22px; }
+  .stat-card strong { font-size: 1.55rem; overflow-wrap: anywhere; }
+  .weekly-page, .stats-page, .history-card, .side-panel { scroll-margin-top: 12px; }
+  .day-tabs { display: flex; overflow-x: auto; gap: 10px; padding: 2px 2px 10px; scroll-snap-type: x mandatory; }
+  .day-tab { min-width: 142px; scroll-snap-align: start; }
+  .workout-header { gap: 12px; }
+  .reward-badge { width: 100%; text-align: center; }
+  .exercise-row { padding: 14px; border-radius: 20px; }
+  .exercise-copy strong { font-size: 1.04rem; }
+  .side-panel { display: grid; gap: 12px; }
+  .panel, .stats-page, .history-card { margin-top: 12px; }
+}
