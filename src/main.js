@@ -85,139 +85,128 @@ const QUESTS = [
   ['Warm-up Ritual', 'Move for 5 minutes before the quest', 10],
   ['Protein Feast', 'Eat a protein-forward meal', 12],
 ];
-const WORKOUT_PROGRAM = {
-  Monday: {
-    title: 'Upper Body A',
-    focus: 'Strength',
-    theme: 'strength',
-    exercises: [
-      ['Chest Press Machine', '3', '10', 'Sit tall, keep your shoulder blades back, and press the handles forward with control.', 'Machine push-ups or lighter chest press.', 'Dumbbell bench press.'],
-      ['Lat Pulldown', '3', '10', 'Grip the bar just outside shoulder width and pull to your upper chest without leaning back hard.', 'Use a lighter weight or assisted band pulldown.', 'Assisted pull-ups or strict pull-ups.'],
-      ['Seated Row', '3', '10', 'Pull the handle toward your ribs, squeeze your shoulder blades, then return slowly.', 'Use a lighter cable row.', 'Single-arm cable row with a pause.'],
-      ['Dumbbell Shoulder Press', '3', '10', 'Start at shoulder height and press overhead while keeping your ribs down.', 'Seated machine shoulder press.', 'Standing dumbbell shoulder press.'],
-      ['Dumbbell Curl', '3', '12', 'Keep elbows near your sides and curl without swinging.', 'Cable curl with light weight.', 'Alternating incline dumbbell curl.'],
-      ['Tricep Pushdown', '3', '12', 'Pin elbows to your sides and press the rope or bar down until arms are straight.', 'Single-arm band pushdown.', 'Overhead cable tricep extension.'],
-    ],
+const PLAN_LIBRARY = {
+  muscle: {
+    Monday: ['Chest + Triceps Hypertrophy', 'Strength', 'strength', [['Machine Chest Press', '4', '8–12'], ['Incline Dumbbell Press', '3', '10–12'], ['Pec Deck Fly', '3', '12–15'], ['Cable Tricep Pushdown', '3', '10–12'], ['Overhead Dumbbell Extension', '3', '12']]],
+    Tuesday: ['Back + Biceps Volume', 'Strength', 'strength', [['Lat Pulldown', '4', '8–12'], ['Chest-Supported Row', '3', '10–12'], ['Single-Arm Dumbbell Row', '3', '10 each'], ['Preacher Curl Machine', '3', '10–12'], ['Hammer Curl', '3', '12']]],
+    Wednesday: ['Leg Hypertrophy', 'Strength', 'strength', [['Leg Press', '4', '10–12'], ['Romanian Deadlift', '3', '8–10'], ['Leg Extension', '3', '12–15'], ['Seated Leg Curl', '3', '12–15'], ['Standing Calf Raise', '4', '12–15']]],
+    Thursday: ['Shoulders + Arms Pump', 'Strength', 'strength', [['Dumbbell Shoulder Press', '4', '8–12'], ['Cable Lateral Raise', '4', '12–15'], ['Rear Delt Fly Machine', '3', '12–15'], ['EZ-Bar Curl', '3', '10–12'], ['Rope Tricep Extension', '3', '12']]],
+    Friday: ['Upper Progressive Overload', 'Strength', 'strength', [['Dumbbell Bench Press', '4', '8–10'], ['Seated Cable Row', '4', '8–10'], ['Machine Shoulder Press', '3', '10'], ['Lat Pulldown', '3', '10–12'], ['Cable Curl + Pushdown Superset', '3', '12 each']]],
+    Saturday: ['Lower + Glute Volume', 'Strength', 'strength', [['Hack Squat', '4', '8–12'], ['Hip Thrust Machine', '4', '10–12'], ['Walking Lunges', '3', '12 each'], ['Leg Curl', '3', '12–15'], ['Calf Press', '4', '15']]],
+    Sunday: ['Hypertrophy Recovery', 'Mobility', 'mobility', [['Easy Bike', '1', '20 minutes'], ['Full-Body Mobility Flow', '1', '15 minutes'], ['Band Pull-Aparts', '2', '20']]],
   },
-  Tuesday: {
-    title: 'Lower Body A',
-    focus: 'Strength',
-    theme: 'strength',
-    exercises: [
-      ['Leg Press', '4', '10', 'Place feet about shoulder width and lower the sled until knees bend comfortably, then press through mid-foot.', 'Bodyweight box squat.', 'Hack squat or heavier leg press.'],
-      ['Leg Curl', '3', '12', 'Curl smoothly, pause briefly, and lower the weight under control.', 'Stability ball hamstring curl.', 'Single-leg machine curl.'],
-      ['Leg Extension', '3', '12', 'Lift until knees are straight without locking hard, then lower slowly.', 'Terminal knee extensions with a band.', 'Single-leg leg extension.'],
-      ['Walking Lunges', '3', '10 each leg', 'Step forward, lower with control, and push through the front foot to stand tall.', 'Static split squat holding support.', 'Dumbbell walking lunges.'],
-      ['Calf Raises', '4', '15', 'Rise onto the balls of your feet, pause at the top, and lower fully.', 'Seated bodyweight calf raises.', 'Single-leg calf raises.'],
-    ],
+  fatLoss: {
+    Monday: ['Metabolic Upper Supersets', 'Fat Burn', 'fat-burn', [['Push-Up + Row Superset', '4', '12 each'], ['Dumbbell Thrusters', '3', '15'], ['Battle Ropes', '5', '30 seconds'], ['Incline Walk Finisher', '1', '15 minutes']]],
+    Tuesday: ['Lower Body Circuit', 'Fat Burn', 'fat-burn', [['Goblet Squat', '4', '15'], ['Reverse Lunge', '3', '12 each'], ['Kettlebell Swings', '4', '20'], ['Calf Raise', '3', '20'], ['Bike Sprints', '8', '20 seconds']]],
+    Wednesday: ['Cardio Core Burn', 'Endurance', 'fat-burn', [['Treadmill Intervals', '1', '25 minutes'], ['Mountain Climbers', '4', '40 seconds'], ['Plank Jacks', '3', '30 seconds'], ['Bicycle Crunches', '3', '25']]],
+    Thursday: ['Full-Body Density Circuit', 'Fat Burn', 'fat-burn', [['Dumbbell Deadlift to Row', '4', '12'], ['Step-Up to Press', '3', '12 each'], ['Cable Woodchop', '3', '15 each'], ['Row Erg Finisher', '1', '10 minutes']]],
+    Friday: ['HIIT + Upper Tone', 'Fat Burn', 'fat-burn', [['Lat Pulldown', '3', '15'], ['Machine Chest Press', '3', '15'], ['Seated Row', '3', '15'], ['Assault Bike Intervals', '10', '30 seconds']]],
+    Saturday: ['Calorie Burn Challenge', 'Fat Burn', 'fat-burn', [['Sled Push or Treadmill Push', '6', '30 seconds'], ['Walking Lunges', '4', '20 steps'], ['Medicine Ball Slams', '4', '15'], ['Incline Walk', '1', '20 minutes']]],
+    Sunday: ['Active Recovery Walk', 'Mobility', 'mobility', [['Easy Walk', '1', '30 minutes'], ['Stretching', '1', '15 minutes']]],
   },
-  Wednesday: {
-    title: 'Cardio + Core',
-    focus: 'Endurance',
-    theme: 'endurance',
-    exercises: [
-      ['Treadmill Walk', '1', '20 minutes', 'Walk at a pace where you can talk but still feel warm and focused.', 'Flat easy walk.', 'Incline walk or brisk walk.'],
-      ['Bicycle Crunches', '3', '20', 'Rotate your torso slowly and reach opposite elbow toward opposite knee.', 'Dead bug.', 'Slow bicycle crunch with a pause.'],
-      ['Plank', '3', '30 seconds', 'Brace your abs, squeeze glutes, and keep a straight line from shoulders to ankles.', 'Knee plank.', 'Long-lever plank.'],
-      ['Leg Raises', '3', '15', 'Keep your low back controlled as you raise and lower your legs.', 'Bent-knee reverse crunch.', 'Hanging knee raises.'],
-    ],
+  strength: {
+    Monday: ['Heavy Squat Day', 'Strength', 'strength', [['Back Squat or Leg Press', '5', '3–5'], ['Romanian Deadlift', '4', '5–6'], ['Split Squat', '3', '6 each'], ['Heavy Calf Raise', '4', '8']]],
+    Tuesday: ['Heavy Bench Day', 'Strength', 'strength', [['Bench Press', '5', '3–5'], ['Incline Dumbbell Press', '4', '6'], ['Barbell Row', '4', '5–6'], ['Weighted Dip or Pushdown', '3', '6–8']]],
+    Wednesday: ['Strength Recovery + Core', 'Mobility', 'mobility', [['Easy Bike', '1', '15 minutes'], ['Dead Bug', '3', '8 each'], ['Side Plank', '3', '30 seconds'], ['Hip Mobility', '1', '10 minutes']]],
+    Thursday: ['Heavy Deadlift Day', 'Strength', 'strength', [['Deadlift', '5', '3'], ['Front Squat', '4', '4–6'], ['Hamstring Curl', '3', '8'], ['Farmer Carry', '4', '40 yards']]],
+    Friday: ['Heavy Overhead + Pull', 'Strength', 'strength', [['Overhead Press', '5', '3–5'], ['Pull-Up or Lat Pulldown', '4', '5–6'], ['Seated Row', '4', '6'], ['Barbell Curl', '3', '6–8']]],
+    Saturday: ['Power Accessories', 'Strength', 'strength', [['Box Squat', '4', '3'], ['Paused Bench Press', '4', '4'], ['Hip Thrust', '4', '5'], ['Loaded Carry', '5', '30 yards']]],
+    Sunday: ['Long Rest + Mobility', 'Mobility', 'mobility', [['Stretching', '1', '20 minutes'], ['Easy Walk', '1', '20 minutes']]],
   },
-  Thursday: {
-    title: 'Push Day',
-    focus: 'Strength',
-    theme: 'strength',
-    exercises: [
-      ['Bench Press', '3', '8', 'Keep feet planted, lower the bar to your mid-chest, and press up smoothly.', 'Chest press machine.', 'Paused bench press.'],
-      ['Incline Dumbbell Press', '3', '10', 'Press from upper-chest height while keeping wrists stacked over elbows.', 'Incline machine press.', 'Low-incline dumbbell press with slower tempo.'],
-      ['Shoulder Press', '3', '10', 'Press overhead with a braced core and lower to shoulder level.', 'Machine shoulder press.', 'Standing barbell overhead press.'],
-      ['Lateral Raises', '3', '12', 'Raise dumbbells to shoulder height with soft elbows and no shrugging.', 'Cable lateral raise with light weight.', 'Lean-away lateral raise.'],
-      ['Tricep Pushdown', '3', '12', 'Keep elbows still and finish each rep by straightening your arms.', 'Band pushdown.', 'Rope pushdown with a 2-second squeeze.'],
-    ],
+  endurance: {
+    Monday: ['Aerobic Base Run/Walk', 'Endurance', 'endurance', [['Treadmill Run/Walk', '1', '35 minutes'], ['Walking Lunges', '3', '20 steps'], ['Plank', '3', '60 seconds']]],
+    Tuesday: ['Cardio Circuit', 'Endurance', 'endurance', [['Row Erg', '4', '5 minutes'], ['Bodyweight Squats', '4', '20'], ['Push-Ups', '4', '15'], ['Mountain Climbers', '4', '45 seconds']]],
+    Wednesday: ['Bike Endurance + Core', 'Endurance', 'endurance', [['Stationary Bike', '1', '40 minutes'], ['Russian Twists', '3', '30'], ['Leg Raises', '3', '20']]],
+    Thursday: ['Tempo Intervals', 'Endurance', 'endurance', [['Treadmill Tempo Intervals', '6', '3 minutes'], ['Step-Ups', '3', '15 each'], ['Cable Row', '3', '15']]],
+    Friday: ['Full-Body Endurance Lift', 'Endurance', 'endurance', [['Dumbbell Squat to Press', '4', '15'], ['Lat Pulldown', '3', '15'], ['Kettlebell Swings', '4', '20'], ['Battle Ropes', '5', '30 seconds']]],
+    Saturday: ['Long Cardio Quest', 'Endurance', 'endurance', [['Outdoor Walk/Jog or Elliptical', '1', '50 minutes'], ['Core Circuit', '3', '4 rounds']]],
+    Sunday: ['Recovery Cardio', 'Mobility', 'mobility', [['Easy Walk', '1', '30 minutes'], ['Mobility Flow', '1', '15 minutes']]],
   },
-  Friday: {
-    title: 'Pull Day',
-    focus: 'Strength',
-    theme: 'strength',
-    exercises: [
-      ['Lat Pulldown', '3', '10', 'Pull your elbows down toward your ribs and control the return.', 'Light wide-grip pulldown.', 'Assisted pull-up.'],
-      ['Seated Row', '3', '10', 'Sit tall and row to your torso without yanking with your lower back.', 'Chest-supported machine row.', 'Single-arm dumbbell row.'],
-      ['Face Pulls', '3', '15', 'Pull the rope toward your face with elbows high and squeeze rear shoulders.', 'Band pull-aparts.', 'Cable face pull with external rotation.'],
-      ['Dumbbell Curl', '3', '12', 'Curl with palms up and keep your upper arms quiet.', 'Light cable curl.', 'Incline dumbbell curl.'],
-      ['Hammer Curl', '3', '12', 'Curl with thumbs up and control the weight down.', 'Alternating light hammer curl.', 'Cross-body hammer curl.'],
-    ],
+  general: {
+    Monday: ['Balanced Upper Body', 'Strength', 'strength', [['Chest Press Machine', '3', '10'], ['Lat Pulldown', '3', '10'], ['Seated Row', '3', '12'], ['Dumbbell Shoulder Press', '3', '10']]],
+    Tuesday: ['Balanced Lower Body', 'Strength', 'strength', [['Leg Press', '3', '10'], ['Romanian Deadlift', '3', '10'], ['Leg Curl', '3', '12'], ['Calf Raise', '3', '15']]],
+    Wednesday: ['Cardio + Core Balance', 'Endurance', 'endurance', [['Treadmill Walk', '1', '25 minutes'], ['Plank', '3', '40 seconds'], ['Bicycle Crunches', '3', '20']]],
+    Thursday: ['Functional Full Body', 'Endurance', 'endurance', [['Goblet Squat', '3', '12'], ['Dumbbell Row', '3', '12'], ['Push-Ups', '3', '10'], ['Farmer Carry', '3', '40 yards']]],
+    Friday: ['Machines + Mobility', 'Strength', 'strength', [['Machine Chest Press', '3', '12'], ['Cable Row', '3', '12'], ['Leg Extension', '3', '12'], ['Stretching', '1', '10 minutes']]],
+    Saturday: ['Conditioning Mix', 'Fat Burn', 'fat-burn', [['Incline Walk', '1', '20 minutes'], ['Kettlebell Deadlift', '3', '12'], ['Step-Ups', '3', '12 each'], ['Core Circuit', '3', '3 rounds']]],
+    Sunday: ['Restorative Recovery', 'Mobility', 'mobility', [['Easy Walk', '1', '20 minutes'], ['Full-Body Mobility', '1', '15 minutes']]],
   },
-  Saturday: {
-    title: 'Legs + Conditioning',
-    focus: 'Fat Burn',
-    theme: 'fat-burn',
-    exercises: [
-      ['Leg Press', '4', '8', 'Use a strong but controlled press and avoid bouncing at the bottom.', 'Goblet squat to a box.', 'Heavier leg press.'],
-      ['Romanian Deadlift', '3', '10', 'Hinge at the hips, keep the weights close, and feel the stretch in hamstrings.', 'Dumbbell hip hinge practice.', 'Barbell Romanian deadlift.'],
-      ['Leg Curl', '3', '12', 'Curl, pause briefly, then lower slowly to train the hamstrings.', 'Stability ball leg curl.', 'Single-leg curl.'],
-      ['Calf Raises', '4', '15', 'Move through a full range of motion and pause at the top.', 'Bodyweight calf raises.', 'Weighted standing calf raises.'],
-      ['Incline Treadmill Walk', '1', '15 minutes', 'Walk uphill at a steady pace while keeping posture tall.', 'Flat treadmill walk.', 'Higher incline or faster pace.'],
-    ],
-  },
-  Sunday: {
-    title: 'Recovery',
-    focus: 'Mobility',
-    theme: 'mobility',
-    exercises: [
-      ['Stretching', '1', '15 minutes', 'Move through gentle full-body stretches and breathe slowly.', 'Short 5-minute mobility flow.', 'Longer yoga-style recovery flow.'],
-      ['Easy Walk', '1', '20 minutes', 'Keep the pace relaxed and use the walk to recover, not compete.', '10-minute easy walk.', '30-minute easy walk.'],
-    ],
-  },
-};
-
-const ENDURANCE_LEGS_CORE_PROGRAM = {
-  Monday: { title: 'Glutes + Legs Endurance', focus: 'Endurance', theme: 'soft-rpg', exercises: [
-    ['Leg Press', '4', '15', 'Set your feet shoulder-width on the platform, lower with control, then press through your heels without locking your knees.', 'Use a lighter weight or bodyweight box squats.', 'Use a slower 3-second lower or add weight.'],
-    ['Hip Thrust Machine or Glute Bridge', '4', '12', 'Drive through your heels, squeeze glutes at the top, and keep your ribs down.', 'Bodyweight glute bridge on the floor.', 'Pause 2 seconds at the top or use a heavier machine setting.'],
-    ['Walking Lunges', '3', '12 each leg', 'Step forward, lower until both knees bend, then push through the front foot to stand tall.', 'Static split squats holding a rail.', 'Hold dumbbells or add a longer walking path.'],
-    ['Leg Curl', '3', '15', 'Curl smoothly, pause briefly, then lower the pad with control.', 'Use a lighter weight or stability ball hamstring curls.', 'Try single-leg curls.'],
-    ['Stairmaster', '1', '10 minutes', 'Climb at a steady pace with tall posture and light hands on the rails.', 'Use a lower speed or do an incline walk.', 'Increase speed or add 2-5 minutes.'],
-  ] },
-  Tuesday: { title: 'Core + Cardio', focus: 'Endurance', theme: 'soft-rpg', exercises: [
-    ['Treadmill Incline Walk', '1', '25 minutes', 'Walk uphill at a conversational pace while keeping shoulders relaxed.', 'Use flat treadmill walking.', 'Increase incline or add short brisk intervals.'],
-    ['Plank', '3', '45 seconds', 'Brace your abs, squeeze glutes, and keep a straight line from head to heels.', 'Knee plank for 30 seconds.', 'Long-lever plank or add shoulder taps.'],
-    ['Bicycle Crunches', '3', '20', 'Rotate slowly and bring opposite elbow toward opposite knee without pulling your neck.', 'Dead bugs.', 'Slow the tempo and pause each twist.'],
-    ['Leg Raises', '3', '15', 'Keep your lower back controlled as your legs move up and down.', 'Bent-knee reverse crunches.', 'Hanging knee raises.'],
-    ['Russian Twists', '3', '20', 'Sit tall, brace, and rotate side to side with controlled breathing.', 'Keep heels on the floor with no weight.', 'Hold a medicine ball or dumbbell.'],
-  ] },
-  Wednesday: { title: 'Lower Body Conditioning', focus: 'Endurance', theme: 'soft-rpg', exercises: [
-    ['Goblet Squats', '3', '15', 'Hold the weight close to your chest, sit between your hips, and stand by driving through mid-foot.', 'Bodyweight squats to a box.', 'Use a heavier dumbbell or slow tempo.'],
-    ['Step-Ups', '3', '12 each leg', 'Place your whole foot on the step, drive through the working leg, and lower gently.', 'Use a lower step or hold a rail.', 'Hold dumbbells or use a higher box.'],
-    ['Cable Kickbacks', '3', '15 each leg', 'Keep hips square and kick back by squeezing the glute, not arching your back.', 'Bodyweight donkey kicks.', 'Add a pause at the top or more cable weight.'],
-    ['Calf Raises', '4', '20', 'Rise onto your toes, pause, and lower through a full range.', 'Bodyweight calf raises holding support.', 'Single-leg or weighted calf raises.'],
-    ['Bike', '1', '15 minutes', 'Pedal steadily at moderate effort with smooth breathing.', 'Lower resistance easy cycling.', 'Add resistance or alternate 1 minute hard, 1 minute easy.'],
-  ] },
-  Thursday: { title: 'Endurance Full Body', focus: 'Endurance', theme: 'soft-rpg', exercises: [
-    ['Dumbbell Squat to Press', '3', '12', 'Squat with dumbbells at shoulders, stand, then press overhead with a braced core.', 'Bodyweight squat plus light shoulder press.', 'Use heavier dumbbells or reduce rest.'],
-    ['Lat Pulldown', '3', '12', 'Pull the bar to your upper chest while keeping shoulders down and chest lifted.', 'Use lighter weight.', 'Assisted pull-ups or slower eccentrics.'],
-    ['Seated Row', '3', '12', 'Row toward your ribs, squeeze shoulder blades, and return slowly.', 'Light cable row.', 'Pause each rep or use single-arm rows.'],
-    ['Kettlebell Swings', '3', '15', 'Hinge at the hips and snap them forward to float the kettlebell to chest height.', 'Dumbbell Romanian deadlift practice.', 'Heavier swings or extra set.'],
-    ['Treadmill Walk/Jog Intervals', '1', '15 minutes', 'Alternate comfortable walking and light jogging intervals.', 'Walk the full time.', 'Use longer jog intervals or a slight incline.'],
-  ] },
-  Friday: { title: 'Glutes + Core', focus: 'Endurance', theme: 'soft-rpg', exercises: [
-    ['Hip Thrust', '4', '10', 'Set upper back on a bench, tuck ribs, and squeeze glutes hard at the top.', 'Floor glute bridges.', 'Barbell hip thrust or 2-second top pause.'],
-    ['Romanian Deadlift', '3', '12', 'Hinge hips back with a soft knee bend and keep weights close to your legs.', 'Light dumbbell hip hinge.', 'Heavier dumbbells or barbell RDL.'],
-    ['Abductor Machine', '4', '15', 'Sit tall and press knees outward with controlled tempo.', 'Side-lying clamshells.', 'Add a pause at the outer range.'],
-    ['Cable Crunches', '3', '15', 'Kneel, brace, and curl ribs toward hips without pulling with arms.', 'Floor crunches.', 'Use more cable weight with strict control.'],
-    ['Plank', '3', '60 seconds', 'Hold a strong brace and steady breathing without letting hips sag.', 'Knee plank or shorter holds.', 'Weighted plank or plank reaches.'],
-  ] },
-  Saturday: { title: 'Cardio Challenge', focus: 'Endurance', theme: 'soft-rpg', exercises: [
-    ['Stairmaster', '1', '15 minutes', 'Climb steadily and keep pressure through your full foot.', 'Use a lower speed or step-ups.', 'Increase speed or add intervals.'],
-    ['Incline Treadmill Walk', '1', '20 minutes', 'Walk with a tall chest, relaxed grip, and consistent breathing.', 'Flat walk.', 'Higher incline or brisk pace.'],
-    ['Core Finisher', '3', '3 rounds', 'Cycle through 30 seconds each of plank, mountain climbers, and crunches with clean form.', 'Do 2 rounds with longer breaks.', 'Add a fourth round or shorten breaks.'],
-  ] },
-  Sunday: { title: 'Recovery', focus: 'Mobility', theme: 'soft-rpg', exercises: [
-    ['Stretching', '1', '15 minutes', 'Move through gentle lower-body and back stretches with slow breathing.', 'Stretch for 5-10 minutes.', 'Add a guided yoga flow.'],
-    ['Easy Walk', '1', '20 minutes', 'Keep effort easy and use the walk to recover.', 'Walk 10 minutes.', 'Walk 30 minutes.'],
-    ['Mobility work', '1', '10 minutes', 'Do controlled hip circles, ankle rocks, and thoracic rotations.', 'Pick two easy mobility drills.', 'Add deep squat holds and longer flows.'],
-  ] },
 };
 
 const LEGACY_GOAL_MAP = { weightLoss: 'fatLoss', mobility: 'general' };
+const FOCUS_LABEL_PREFIX = { muscle: 'Hypertrophy', fatLoss: 'Fat-Loss', strength: 'Strength', endurance: 'Endurance', legsCore: 'Legs + Core' };
+const FOCUS_DETAIL = {
+  muscle: 'moderate reps, machines and dumbbells, progressive overload',
+  fatLoss: 'supersets, cardio finishers, circuits, and short rest',
+  strength: 'heavier lifts, lower reps, and longer rest',
+  endurance: 'more cardio, circuits, higher reps, and shorter rest',
+  legsCore: 'glutes, quads, hamstrings, calves, abs, and conditioning',
+};
+const EXPERIENCE_MODS = {
+  beginner: 'Choose conservative loads and leave 2–3 reps in reserve.',
+  intermediate: 'Add load or reps weekly when form stays clean.',
+  advanced: 'Push the final set hard while preserving strict technique.',
+};
+
+function normalizeProfileForPlan(profile = state?.profile || {}) {
+  const fitnessGoal = LEGACY_GOAL_MAP[profile.fitnessGoal || profile.goal] || profile.fitnessGoal || profile.goal || 'general';
+  return {
+    genderStyle: profile.genderStyle || profile.stylePreference || 'neutral',
+    themeColor: profile.themeColor || 'default',
+    fitnessGoal,
+    trainingFocus: LEGACY_GOAL_MAP[profile.trainingFocus] || profile.trainingFocus || fitnessGoal,
+    experienceLevel: profile.experienceLevel || profile.experience || 'beginner',
+  };
+}
+
+function planTypeLabel(profile = state.profile) {
+  const planProfile = normalizeProfileForPlan(profile);
+  return `${GOALS[planProfile.fitnessGoal]?.label || 'General Fitness'} + ${TRAINING_FOCUS[planProfile.trainingFocus] || 'General Fitness'}`;
+}
+
+function workoutInstruction(name, focus, profile) {
+  const focusText = FOCUS_DETAIL[focus] || FOCUS_DETAIL[profile.fitnessGoal] || 'balanced training';
+  const experienceText = EXPERIENCE_MODS[profile.experienceLevel] || EXPERIENCE_MODS.beginner;
+  const styleText = profile.genderStyle === 'female' ? 'Prioritize controlled tempo, posture, and confident form.' : 'Use clean form and steady breathing.';
+  const themeText = profile.themeColor !== 'default' ? `Keep the ${THEME_COLORS[profile.themeColor] || profile.themeColor} quest energy high.` : 'Keep the RPG quest pace steady.';
+  return `${name} emphasis: ${focusText}. ${experienceText} ${styleText} ${themeText}`;
+}
+
+function detailFromPlanExercise([name, sets, reps], focus, profile) {
+  return [name, sets, reps, workoutInstruction(name, focus, profile), `Reduce load, reps, or rounds for ${profile.experienceLevel} recovery.`, `Add load, reps, rounds, or shorten rest when all work is crisp.`];
+}
+
+function applyTrainingFocus(goalDay, day, profile) {
+  const focus = profile.trainingFocus;
+  if (focus === profile.fitnessGoal && profile.genderStyle !== 'female') return goalDay;
+  const [title, dayFocus, theme, exercises] = goalDay;
+  const prefix = FOCUS_LABEL_PREFIX[focus] || 'Focused';
+  const focusBlocks = {
+    muscle: [['Machine Chest Press', '3', '10–12'], ['Dumbbell Row', '3', '10–12'], ['Cable Lateral Raise', '3', '12–15']],
+    fatLoss: [['Superset Circuit', '4', '12–15'], ['Battle Ropes', '5', '30 seconds'], ['Cardio Finisher', '1', '12 minutes']],
+    strength: [['Main Heavy Lift', '5', '3–5'], ['Accessory Lift', '4', '5–6'], ['Loaded Carry', '4', '30 yards']],
+    endurance: [['Steady Cardio', '1', day === 'Saturday' ? '45 minutes' : '30 minutes'], ['High-Rep Circuit', '4', '15–20'], ['Core Conditioning', '3', '45 seconds']],
+    legsCore: [['Hip Thrust or Glute Bridge', '4', '12–15'], ['Quad/Hamstring Superset', '3', '15 each'], ['Calves + Abs Circuit', '4', '20 reps']]
+  };
+  const selected = focusBlocks[focus] || focusBlocks.endurance;
+  const merged = day === 'Sunday' ? [...exercises, selected[2]] : [...selected, ...exercises.slice(0, 2)];
+  const resolvedTheme = focus === 'fatLoss' ? 'fat-burn' : focus === 'endurance' ? 'endurance' : (focus === 'legsCore' && profile.genderStyle === 'female') ? 'soft-rpg' : theme;
+  const resolvedFocus = focus === 'fatLoss' ? 'Fat Burn' : focus === 'strength' || focus === 'muscle' ? 'Strength' : focus === 'legsCore' ? 'Endurance' : dayFocus;
+  return [`${prefix} ${title}`, resolvedFocus, resolvedTheme, merged];
+}
+
+function generateWorkoutPlan(profile = state.profile) {
+  const planProfile = normalizeProfileForPlan(profile);
+  const source = PLAN_LIBRARY[planProfile.fitnessGoal] || PLAN_LIBRARY.general;
+  return Object.fromEntries(DAYS.map((day) => {
+    const workout = applyTrainingFocus(source[day], day, planProfile);
+    const [title, focus, theme, rawExercises] = workout;
+    const exercises = rawExercises.map((exercise) => [exercise[0], exerciseDetail(detailFromPlanExercise(exercise, planProfile.trainingFocus, planProfile), planProfile)]);
+    return [day, { title, focus, exercises, bossDamage: exercises.length * 10, theme }];
+  }));
+}
+
+
 const root = document.querySelector('#root');
 let lastCompletion = null;
 let state = normalizeState(loadState());
@@ -228,10 +217,14 @@ function normalizeState(saved = {}) {
   next.careerXp = { ...CAREER_XP, ...(next.careerXp || {}) };
   next.login = { lastClaim: '', streak: 0, boosts: 0, ...(next.login || {}) };
   next.notifications = { enabled: false, questHour: '08:00', ...(next.notifications || {}) }; next.rareAvatars = next.rareAvatars || {}; next.seasons = next.seasons || {}; next.penalties = next.penalties || {}; next.steps = next.steps || {}; next.water = next.water || {}; next.weightLog = next.weightLog || []; next.strengthLog = next.strengthLog || [];
-  next.profile.goal = LEGACY_GOAL_MAP[next.profile.goal] || next.profile.goal || 'endurance';
-  next.profile.stylePreference = next.profile.stylePreference || 'neutral';
+  next.profile.goal = LEGACY_GOAL_MAP[next.profile.fitnessGoal || next.profile.goal] || next.profile.fitnessGoal || next.profile.goal || 'endurance';
+  next.profile.fitnessGoal = next.profile.goal;
+  next.profile.stylePreference = next.profile.genderStyle || next.profile.stylePreference || 'neutral';
+  next.profile.genderStyle = next.profile.stylePreference;
   next.profile.themeColor = next.profile.themeColor || 'default';
-  next.profile.trainingFocus = next.profile.trainingFocus || next.profile.goal || 'endurance';
+  next.profile.trainingFocus = LEGACY_GOAL_MAP[next.profile.trainingFocus] || next.profile.trainingFocus || next.profile.goal || 'endurance';
+  next.profile.experience = next.profile.experienceLevel || next.profile.experience || 'beginner';
+  next.profile.experienceLevel = next.profile.experience;
   next.plan = generatePlan(next.profile);
   return next;
 }
@@ -293,14 +286,7 @@ function exerciseDetail([, sets, reps, instructions, easier, harder], profile = 
   const goal = goalModifier(profile);
   return `Sets: ${sets} • Reps: ${repsForGoal(reps, goal)} • Rest: ${restTime(goal)} • Instructions: ${instructions} • Easier: ${easier} • Harder: ${harder} • ${goalCue(goal)}`;
 }
-function generatePlan(profile = state.profile) {
-  return Object.fromEntries(DAYS.map((day) => {
-    const sourceProgram = isEnduranceLegsCore(profile) ? ENDURANCE_LEGS_CORE_PROGRAM : WORKOUT_PROGRAM;
-    const workout = sourceProgram[day];
-    const exercises = workout.exercises.map((exercise) => [exercise[0], exerciseDetail(exercise, profile)]);
-    return [day, { title: workout.title, focus: workout.focus, exercises, bossDamage: exercises.length * 10, theme: workout.theme }];
-  }));
-}
+function generatePlan(profile = state.profile) { return generateWorkoutPlan(profile); }
 function addRewards(xp, coins) { const old = getLevel(); state.xp += xp; state.coins += coins; state.lifetimeCoins += coins; return getLevel() > old; }
 function checkAchievements() { const unlocked = []; ACHIEVEMENTS.forEach((a) => { if (!state.achievements[a.id] && a.test(state)) { state.achievements[a.id] = dateKey(); unlocked.push(a); } }); return unlocked; }
 function dailyQuestKey(index) { return `${dateKey()}-${index}`; }
@@ -328,7 +314,7 @@ function setQuestHour(value) { state.notifications.questHour = value || '08:00';
 
 
 function submitOnboarding(form) {
-  state.profile = { name: form.name.value.trim() || 'Hero', age: form.age.value, height: form.height.value, weight: form.weight.value, goal: form.goal.value, experience: form.experience.value, stylePreference: form.stylePreference.value, themeColor: form.themeColor.value, trainingFocus: form.trainingFocus.value };
+  state.profile = { name: form.name.value.trim() || 'Hero', age: form.age.value, height: form.height.value, weight: form.weight.value, goal: form.goal.value, fitnessGoal: form.goal.value, experience: form.experience.value, experienceLevel: form.experience.value, stylePreference: form.stylePreference.value, genderStyle: form.stylePreference.value, themeColor: form.themeColor.value, trainingFocus: form.trainingFocus.value };
   state.character = { name: form.heroName.value.trim() || `${state.profile.name}'s Hero`, class: form.heroClass.value, avatar: form.avatar.value, title: 'Level 1 Rookie', frame: isSoftTheme(state.profile) ? 'Bloom Frame' : 'Bronze Frame' };
   state.plan = generatePlan(state.profile); state.onboarded = true; state.checked = {}; state.completedWorkouts = {}; saveState(); render();
 }
@@ -375,7 +361,7 @@ function optionList(items, selected = '') { return Object.entries(items).map(([v
 function avatarChoices(selected = AVATARS[0]) { return [...AVATARS, ...THEME_AVATARS].map((a, i) => `<label class="avatar-choice"><input type="radio" name="avatar" value="${a}" ${selected === a || (!selected && i === 0) ? 'checked' : ''}/><span>${a}</span></label>`).join(''); }
 function renderOnboarding() { root.innerHTML = `<main class="onboarding ${themeClass(state.profile)}"><section class="hero-card onboarding-card"><p class="eyebrow">Fitness RPG Setup</p><h1>Forge your fitness hero</h1><p>Choose your style, theme, and training focus. Female style plus Endurance and Legs + Core unlocks the new glutes, core, and cardio questline.</p><form id="onboardingForm" class="onboarding-grid"><label>Name<input name="name" required placeholder="Alex" value="${escapeHtml(state.profile.name || '')}" /></label><label>Age<input name="age" type="number" min="10" max="100" required value="${escapeHtml(state.profile.age || '')}" /></label><label>Height<input name="height" placeholder="5'10 or 178 cm" required value="${escapeHtml(state.profile.height || '')}" /></label><label>Weight<input name="weight" placeholder="170 lb or 77 kg" required value="${escapeHtml(state.profile.weight || '')}" /></label><label>Gender/style preference<select name="stylePreference">${optionList(STYLE_PREFERENCES, state.profile.stylePreference)}</select></label><label>Theme color<select name="themeColor">${optionList(THEME_COLORS, state.profile.themeColor)}</select></label><label>Fitness goal<select name="goal">${Object.entries(GOALS).map(([k,g]) => `<option value="${k}" ${state.profile.goal === k ? 'selected' : ''}>${g.icon} ${g.label}</option>`).join('')}</select></label><label>Training focus<select name="trainingFocus">${optionList(TRAINING_FOCUS, state.profile.trainingFocus)}</select></label><label>Experience<select name="experience">${Object.entries(LEVELS).map(([k,l]) => `<option value="${k}" ${state.profile.experience === k ? 'selected' : ''}>${l.label}</option>`).join('')}</select></label><label>Hero name<input name="heroName" placeholder="Sir Sweatsalot" value="${escapeHtml(state.character.name || '')}" /></label><label>Class<select name="heroClass">${CLASSES.map((c) => `<option ${state.character.class === c ? 'selected' : ''}>${c}</option>`).join('')}</select></label><fieldset><legend>Avatar</legend>${avatarChoices(state.character.avatar)}</fieldset><button class="generate-button">Start Adventure</button></form></section></main>`; }
 function render() { if (!state.onboarded) return renderOnboarding(); applyMissedPenalty(); if (!DAYS.includes(state.selectedDay)) state.selectedDay = todayName(); if (!state.plan?.[state.selectedDay]) state.plan = generatePlan(state.profile); const today = todayName(); const workout = state.plan[state.selectedDay]; const key = workoutKey(); const checks = state.checked[key] || []; const done = checks.filter(Boolean).length; const allDone = workout.exercises.every((_, index) => Boolean(checks[index])); const completed = Boolean(state.completedWorkouts[key]); const history = historyEntries().sort((a,b) => b.id.localeCompare(a.id)); const bossHp = Math.max(0, 100 - DAYS.reduce((sum, d) => sum + (state.completedWorkouts[`${dateKey()}-${d}`] ? 14 : 0), 0));
-  root.innerHTML = `<main class="app-shell ${themeClass(state.profile)}"><section id="home" class="hero-card top-hero"><div class="character"><div class="avatar game-frame">${escapeHtml(state.character.avatar)}</div><div><p class="eyebrow">${escapeHtml(state.character.title || 'Level 1 Rookie')} • ${escapeHtml(state.character.class)} • ${escapeHtml(GOALS[state.profile.goal]?.label || 'Custom Goal')}</p><h1>${escapeHtml(state.character.name)}</h1><div class="rank-track"><b>${currentRank()}</b>${progressBar(rankProgress())}</div><p>${escapeHtml(state.profile.name)}, age ${escapeHtml(state.profile.age)} • ${escapeHtml(state.profile.height)} • ${escapeHtml(state.profile.weight)}</p>${progressBar(levelProgress())}<small>${state.xp % XP_PER_LEVEL}/${XP_PER_LEVEL} XP to next level</small></div></div><div class="hero-actions"><button class="ghost-button" data-action="reset">Edit Settings</button><button class="generate-button" data-action="generate">Regenerate Plan</button></div></section>${lastCompletion ? `<section class="loot-modal reward-screen"><div class="confetti">✦ ✧ ✦ ✧ ✦</div><h2>Quest Complete: ${lastCompletion.title}</h2>${lastCompletion.loot ? `<div class="chest-pop"><span>${lastCompletion.loot.box.icon}</span><b>${lastCompletion.loot.box.name}</b><small>${lastCompletion.loot.reward.icon} Random reward: ${lastCompletion.loot.reward.label}</small></div>` : ''}<div class="loot-row"><b>+${lastCompletion.xp} XP</b><b>+${lastCompletion.coins} coins</b><b>${lastCompletion.multiplier ? `${lastCompletion.multiplier}× streak XP` : `Level ${getLevel()} • ${levelProgress()}%`}</b></div>${lastCompletion.loot?.rareAvatar ? `<p class="rare-unlock">🦄 Rare avatar unlocked: ${lastCompletion.loot.rareAvatar.name} ${lastCompletion.loot.rareAvatar.icon}</p>` : ''}${lastCompletion.unlocked.length ? `<p>🏅 Unlocked: ${lastCompletion.unlocked.map((a) => a.name).join(', ')}</p>` : '<p>No new badges this time. Keep grinding!</p>'}<button data-action="dismiss" class="complete-button">Continue</button></section>` : ''}<section class="dashboard">${stat('Rank', currentRank(), `Career ${rankProgress()}%`, '🎖️')}${stat('Level', getLevel(), 'Hero power', '⭐')}${stat('XP', state.xp, `+${XP_PER_EXERCISE} per exercise`, '⚡')}${stat('Coins', state.coins, 'Spend in reward shop', '🪙')}${stat('Streak', `${getStreak()} days`, `${streakMultiplier()}× XP multiplier`, '🔥')}${stat('Style', STYLE_PREFERENCES[state.profile.stylePreference] || 'Neutral', `${THEME_COLORS[state.profile.themeColor] || 'Default RPG'} theme`, '🎨')}${stat('Season', `Lv ${seasonLevel()}`, `${currentSeason().theme} • ${seasonProgress()}%`, '🏰')}</section><section class="content-grid"><div><section id="quest" class="weekly-page"><div class="section-title"><p class="eyebrow">Personalized weekly map</p><h2>Monday-Sunday workout plan</h2></div><div class="day-tabs">${DAYS.map((day) => `<button class="day-tab ${state.selectedDay === day ? 'active' : ''} ${today === day ? 'today' : ''}" data-day="${day}"><span>${day.slice(0,3)}</span><strong>${escapeHtml(state.plan[day].title)}</strong><em>${state.completedWorkouts[`${dateKey()}-${day}`] ? 'Cleared' : today === day ? 'Today' : 'Quest'}</em></button>`).join('')}</div><article class="workout-card ${workout.theme}"><div class="workout-header"><div><p class="eyebrow">${state.selectedDay} ${state.selectedDay === 'Sunday' ? '• Weekly Boss' : '• Daily Dungeon'}</p><h2>${escapeHtml(workout.title)}</h2><p>${done}/${workout.exercises.length} moves completed • Boss damage ${workout.bossDamage}</p></div><div class="reward-badge">Clear: +${Math.round((DAILY_XP_BONUS + (state.selectedDay === 'Sunday' ? 90 : 0)) * streakMultiplier())} XP · +${DAILY_COIN_BONUS + (state.selectedDay === 'Sunday' ? 60 : 0)} coins</div></div><div class="exercise-list">${workout.exercises.map(([name, detail], i) => `<label class="exercise-row ${checks[i] ? 'done' : ''}"><input type="checkbox" data-exercise="${i}" ${checks[i] ? 'checked' : ''} ${completed ? 'disabled' : ''}/><span class="exercise-copy"><strong>${escapeHtml(name)}</strong><small>${escapeHtml(detail)}</small></span><span class="xp-pill">+${XP_PER_EXERCISE} XP</span></label>`).join('')}</div><button class="complete-button" data-action="complete" ${!allDone || completed ? 'disabled' : ''}>${completed ? 'Workout Completed' : 'Complete Workout'}</button></article></section><section id="progress" class="stats-page"><div class="section-title"><p class="eyebrow">Career statistics</p><h2>Hero record book</h2></div><div class="stats-grid">${stat('Workouts completed', historyEntries().length, 'All-time clears', '✅')}${stat('Current streak', `${getStreak()} days`, 'Active chain', '🔥')}${stat('Longest streak', `${longestStreak()} days`, 'Personal best', '🏆')}${stat('Total XP', state.xp + totalCareerXp(), 'Hero + career XP', '⚡')}${stat('Total coins', state.lifetimeCoins, 'Lifetime earned', '🪙')}${stat('Weight progress', trend(state.weightLog, state.profile.weight || 'Add a log'), 'Latest change', '⚖️')}${stat('Strength progress', trend(state.strengthLog, 'Add a PR'), 'Latest lift score', '💪')}</div><div class="log-row"><label>Log weight<input data-log="weight" placeholder="178 lb"></label><label>Log strength<input data-log="strength" placeholder="Bench 135"></label></div></section><section class="history-card"><h2>Workout history</h2><div class="history-list">${history.slice(0,8).map((entry) => `<div><b>${escapeHtml(entry.day)}</b><span>${escapeHtml(entry.title)}</span><small>${escapeHtml(entry.date)} ${escapeHtml(entry.completed)} • +${entry.xp} XP • +${entry.coins} coins</small></div>`).join('') || '<p>No completed workouts yet. Your quest log is waiting.</p>'}</div></section></div><aside id="rewards" class="side-panel"><section class="panel notification-panel"><h2>Daily quest notifications</h2><p>Get a daily nudge to keep your streak alive and avoid missed-workout penalties.</p><label class="mini-input">Reminder time<input type="time" value="${state.notifications.questHour}" data-notify-hour></label><button class="complete-button" data-action="notify">${state.notifications.enabled ? 'Notifications armed' : 'Enable quest reminders'}</button><small>${'Notification' in window ? `Browser permission: ${Notification.permission}` : 'Browser notifications unavailable here'} • Shields: ${state.shields || 0}</small>${state.penalties.last?.date === dateKey() ? `<p class="penalty">${state.penalties.last.shielded ? '🛡️ Streak shield blocked yesterday’s penalty.' : `💔 Missed workout penalty: -${state.penalties.last.coins} coins.`}</p>` : ''}</section><section class="panel season-panel"><h2>Monthly season</h2><p>${currentSeason().theme} resets each month. Earn season XP from workouts and loot.</p>${progressBar(seasonProgress())}<strong>Season level ${seasonLevel()} • ${currentSeason().xp} XP</strong></section><section class="panel avatar-panel"><h2>Rare avatars</h2><div class="rare-grid">${RARE_AVATARS.map((a) => `<div class="rare-avatar ${state.rareAvatars[a.id] ? 'unlocked' : ''}"><span>${state.rareAvatars[a.id] ? a.icon : '❔'}</span><b>${a.name}</b></div>`).join('')}</div></section><section class="panel login-panel"><h2>Daily login rewards</h2><div class="login-track">${LOGIN_REWARDS.map((r, i) => `<div class="login-day ${(state.login.streak || 0) > i ? 'claimed' : ''}"><span>${r.icon}</span><b>Day ${r.day}</b><small>${r.label}</small></div>`).join('')}</div><button class="complete-button" data-action="login" ${!canClaimLogin() ? 'disabled' : ''}>${canClaimLogin() ? `Claim ${currentLoginReward().label}` : 'Claimed today'}</button></section><section class="panel"><h2>Weekly challenges</h2>${WEEKLY_CHALLENGES.map((c) => { const value = c.metric(state); return `<div class="challenge"><b>${c.icon} ${c.title}</b><small>${Math.min(value, c.target).toLocaleString()} / ${c.target.toLocaleString()}</small>${progressBar((value / c.target) * 100)}</div>`; }).join('')}<label class="mini-input">Today steps<input type="number" min="0" value="${state.steps[dateKey()] || ''}" data-track="steps" placeholder="0"></label><label class="water-toggle"><input type="checkbox" data-track="water" ${state.water[dateKey()] ? 'checked' : ''}> Water goal complete today</label></section><section class="panel"><h2>Daily quests</h2>${QUESTS.map((q,i) => `<button class="quest ${state.quests[dailyQuestKey(i)] ? 'done' : ''}" data-quest="${i}" ${state.quests[dailyQuestKey(i)] ? 'disabled' : ''}><b>${q[0]}</b><span>${q[1]}</span><em>+${q[2]} XP • +5 coins</em></button>`).join('')}</section><section class="panel boss"><h2>Weekly boss battle 🐲</h2><p>Complete daily dungeons to weaken the Sunday dragon.</p>${progressBar(100 - bossHp)}<strong>${bossHp} HP remaining</strong></section><section class="panel"><h2>Reward shop</h2>${SHOP_ITEMS.map((item) => `<button class="shop-item" data-buy="${item.id}" ${state.inventory.includes(item.id) || state.coins < item.price ? 'disabled' : ''}><span>${item.icon}</span><b>${item.name}</b><small>${state.inventory.includes(item.id) ? 'Owned' : `${item.price} coins`} • ${item.perk}</small></button>`).join('')}</section><section class="panel"><h2>Achievement badges</h2><div class="badges">${ACHIEVEMENTS.map((a) => `<div class="badge ${state.achievements[a.id] ? 'unlocked' : ''}"><span>${a.icon}</span><b>${a.name}</b><small>${a.desc}</small></div>`).join('')}</div></section><section class="panel"><h2>Progress charts</h2><div class="bars">${DAYS.map((d) => { const c = state.completedWorkouts[`${dateKey()}-${d}`] ? 100 : 0; return `<label>${d.slice(0,3)}${progressBar(c)}</label>`; }).join('')}</div><p>Lifetime coins: ${state.lifetimeCoins} • Boss wins: ${state.bossWins}</p></section></aside></section><nav class="bottom-nav" aria-label="Primary mobile navigation"><a href="#home"><span>🏠</span>Home</a><a href="#quest"><span>⚔️</span>Quest</a><a href="#progress"><span>📈</span>Stats</a><a href="#rewards"><span>🎁</span>Loot</a></nav></main>`; }
+  root.innerHTML = `<main class="app-shell ${themeClass(state.profile)}"><section id="home" class="hero-card top-hero"><div class="character"><div class="avatar game-frame">${escapeHtml(state.character.avatar)}</div><div><p class="eyebrow">${escapeHtml(state.character.title || 'Level 1 Rookie')} • ${escapeHtml(state.character.class)} • ${escapeHtml(GOALS[state.profile.goal]?.label || 'Custom Goal')}</p><h1>${escapeHtml(state.character.name)}</h1><div class="rank-track"><b>${currentRank()}</b>${progressBar(rankProgress())}</div><p>${escapeHtml(state.profile.name)}, age ${escapeHtml(state.profile.age)} • ${escapeHtml(state.profile.height)} • ${escapeHtml(state.profile.weight)}</p>${progressBar(levelProgress())}<small>${state.xp % XP_PER_LEVEL}/${XP_PER_LEVEL} XP to next level</small></div></div><div class="hero-actions"><button class="ghost-button" data-action="reset">Edit Settings</button><button class="generate-button" data-action="generate">Regenerate Plan</button></div></section>${lastCompletion ? `<section class="loot-modal reward-screen"><div class="confetti">✦ ✧ ✦ ✧ ✦</div><h2>Quest Complete: ${lastCompletion.title}</h2>${lastCompletion.loot ? `<div class="chest-pop"><span>${lastCompletion.loot.box.icon}</span><b>${lastCompletion.loot.box.name}</b><small>${lastCompletion.loot.reward.icon} Random reward: ${lastCompletion.loot.reward.label}</small></div>` : ''}<div class="loot-row"><b>+${lastCompletion.xp} XP</b><b>+${lastCompletion.coins} coins</b><b>${lastCompletion.multiplier ? `${lastCompletion.multiplier}× streak XP` : `Level ${getLevel()} • ${levelProgress()}%`}</b></div>${lastCompletion.loot?.rareAvatar ? `<p class="rare-unlock">🦄 Rare avatar unlocked: ${lastCompletion.loot.rareAvatar.name} ${lastCompletion.loot.rareAvatar.icon}</p>` : ''}${lastCompletion.unlocked.length ? `<p>🏅 Unlocked: ${lastCompletion.unlocked.map((a) => a.name).join(', ')}</p>` : '<p>No new badges this time. Keep grinding!</p>'}<button data-action="dismiss" class="complete-button">Continue</button></section>` : ''}<section class="dashboard">${stat('Rank', currentRank(), `Career ${rankProgress()}%`, '🎖️')}${stat('Level', getLevel(), 'Hero power', '⭐')}${stat('XP', state.xp, `+${XP_PER_EXERCISE} per exercise`, '⚡')}${stat('Coins', state.coins, 'Spend in reward shop', '🪙')}${stat('Streak', `${getStreak()} days`, `${streakMultiplier()}× XP multiplier`, '🔥')}${stat('Style', STYLE_PREFERENCES[state.profile.stylePreference] || 'Neutral', `${THEME_COLORS[state.profile.themeColor] || 'Default RPG'} theme`, '🎨')}${stat('Season', `Lv ${seasonLevel()}`, `${currentSeason().theme} • ${seasonProgress()}%`, '🏰')}</section><section class="content-grid"><div><section id="quest" class="weekly-page"><div class="section-title"><p class="eyebrow">Personalized weekly map</p><h2>Monday-Sunday workout plan</h2></div><div class="day-tabs">${DAYS.map((day) => `<button class="day-tab ${state.selectedDay === day ? 'active' : ''} ${today === day ? 'today' : ''}" data-day="${day}"><span>${day.slice(0,3)}</span><strong>${escapeHtml(state.plan[day].title)}</strong><em>${state.completedWorkouts[`${dateKey()}-${day}`] ? 'Cleared' : today === day ? 'Today' : 'Quest'}</em></button>`).join('')}</div><article class="workout-card ${workout.theme}"><div class="workout-header"><div><p class="eyebrow">${state.selectedDay} ${state.selectedDay === 'Sunday' ? '• Weekly Boss' : '• Daily Dungeon'}</p><h2>${escapeHtml(workout.title)}</h2><p class="plan-type-label">Plan Type: ${escapeHtml(planTypeLabel(state.profile))}</p><p>${done}/${workout.exercises.length} moves completed • Boss damage ${workout.bossDamage}</p></div><div class="reward-badge">Clear: +${Math.round((DAILY_XP_BONUS + (state.selectedDay === 'Sunday' ? 90 : 0)) * streakMultiplier())} XP · +${DAILY_COIN_BONUS + (state.selectedDay === 'Sunday' ? 60 : 0)} coins</div></div><div class="exercise-list">${workout.exercises.map(([name, detail], i) => `<label class="exercise-row ${checks[i] ? 'done' : ''}"><input type="checkbox" data-exercise="${i}" ${checks[i] ? 'checked' : ''} ${completed ? 'disabled' : ''}/><span class="exercise-copy"><strong>${escapeHtml(name)}</strong><small>${escapeHtml(detail)}</small></span><span class="xp-pill">+${XP_PER_EXERCISE} XP</span></label>`).join('')}</div><button class="complete-button" data-action="complete" ${!allDone || completed ? 'disabled' : ''}>${completed ? 'Workout Completed' : 'Complete Workout'}</button></article></section><section id="progress" class="stats-page"><div class="section-title"><p class="eyebrow">Career statistics</p><h2>Hero record book</h2></div><div class="stats-grid">${stat('Workouts completed', historyEntries().length, 'All-time clears', '✅')}${stat('Current streak', `${getStreak()} days`, 'Active chain', '🔥')}${stat('Longest streak', `${longestStreak()} days`, 'Personal best', '🏆')}${stat('Total XP', state.xp + totalCareerXp(), 'Hero + career XP', '⚡')}${stat('Total coins', state.lifetimeCoins, 'Lifetime earned', '🪙')}${stat('Weight progress', trend(state.weightLog, state.profile.weight || 'Add a log'), 'Latest change', '⚖️')}${stat('Strength progress', trend(state.strengthLog, 'Add a PR'), 'Latest lift score', '💪')}</div><div class="log-row"><label>Log weight<input data-log="weight" placeholder="178 lb"></label><label>Log strength<input data-log="strength" placeholder="Bench 135"></label></div></section><section class="history-card"><h2>Workout history</h2><div class="history-list">${history.slice(0,8).map((entry) => `<div><b>${escapeHtml(entry.day)}</b><span>${escapeHtml(entry.title)}</span><small>${escapeHtml(entry.date)} ${escapeHtml(entry.completed)} • +${entry.xp} XP • +${entry.coins} coins</small></div>`).join('') || '<p>No completed workouts yet. Your quest log is waiting.</p>'}</div></section></div><aside id="rewards" class="side-panel"><section class="panel notification-panel"><h2>Daily quest notifications</h2><p>Get a daily nudge to keep your streak alive and avoid missed-workout penalties.</p><label class="mini-input">Reminder time<input type="time" value="${state.notifications.questHour}" data-notify-hour></label><button class="complete-button" data-action="notify">${state.notifications.enabled ? 'Notifications armed' : 'Enable quest reminders'}</button><small>${'Notification' in window ? `Browser permission: ${Notification.permission}` : 'Browser notifications unavailable here'} • Shields: ${state.shields || 0}</small>${state.penalties.last?.date === dateKey() ? `<p class="penalty">${state.penalties.last.shielded ? '🛡️ Streak shield blocked yesterday’s penalty.' : `💔 Missed workout penalty: -${state.penalties.last.coins} coins.`}</p>` : ''}</section><section class="panel season-panel"><h2>Monthly season</h2><p>${currentSeason().theme} resets each month. Earn season XP from workouts and loot.</p>${progressBar(seasonProgress())}<strong>Season level ${seasonLevel()} • ${currentSeason().xp} XP</strong></section><section class="panel avatar-panel"><h2>Rare avatars</h2><div class="rare-grid">${RARE_AVATARS.map((a) => `<div class="rare-avatar ${state.rareAvatars[a.id] ? 'unlocked' : ''}"><span>${state.rareAvatars[a.id] ? a.icon : '❔'}</span><b>${a.name}</b></div>`).join('')}</div></section><section class="panel login-panel"><h2>Daily login rewards</h2><div class="login-track">${LOGIN_REWARDS.map((r, i) => `<div class="login-day ${(state.login.streak || 0) > i ? 'claimed' : ''}"><span>${r.icon}</span><b>Day ${r.day}</b><small>${r.label}</small></div>`).join('')}</div><button class="complete-button" data-action="login" ${!canClaimLogin() ? 'disabled' : ''}>${canClaimLogin() ? `Claim ${currentLoginReward().label}` : 'Claimed today'}</button></section><section class="panel"><h2>Weekly challenges</h2>${WEEKLY_CHALLENGES.map((c) => { const value = c.metric(state); return `<div class="challenge"><b>${c.icon} ${c.title}</b><small>${Math.min(value, c.target).toLocaleString()} / ${c.target.toLocaleString()}</small>${progressBar((value / c.target) * 100)}</div>`; }).join('')}<label class="mini-input">Today steps<input type="number" min="0" value="${state.steps[dateKey()] || ''}" data-track="steps" placeholder="0"></label><label class="water-toggle"><input type="checkbox" data-track="water" ${state.water[dateKey()] ? 'checked' : ''}> Water goal complete today</label></section><section class="panel"><h2>Daily quests</h2>${QUESTS.map((q,i) => `<button class="quest ${state.quests[dailyQuestKey(i)] ? 'done' : ''}" data-quest="${i}" ${state.quests[dailyQuestKey(i)] ? 'disabled' : ''}><b>${q[0]}</b><span>${q[1]}</span><em>+${q[2]} XP • +5 coins</em></button>`).join('')}</section><section class="panel boss"><h2>Weekly boss battle 🐲</h2><p>Complete daily dungeons to weaken the Sunday dragon.</p>${progressBar(100 - bossHp)}<strong>${bossHp} HP remaining</strong></section><section class="panel"><h2>Reward shop</h2>${SHOP_ITEMS.map((item) => `<button class="shop-item" data-buy="${item.id}" ${state.inventory.includes(item.id) || state.coins < item.price ? 'disabled' : ''}><span>${item.icon}</span><b>${item.name}</b><small>${state.inventory.includes(item.id) ? 'Owned' : `${item.price} coins`} • ${item.perk}</small></button>`).join('')}</section><section class="panel"><h2>Achievement badges</h2><div class="badges">${ACHIEVEMENTS.map((a) => `<div class="badge ${state.achievements[a.id] ? 'unlocked' : ''}"><span>${a.icon}</span><b>${a.name}</b><small>${a.desc}</small></div>`).join('')}</div></section><section class="panel"><h2>Progress charts</h2><div class="bars">${DAYS.map((d) => { const c = state.completedWorkouts[`${dateKey()}-${d}`] ? 100 : 0; return `<label>${d.slice(0,3)}${progressBar(c)}</label>`; }).join('')}</div><p>Lifetime coins: ${state.lifetimeCoins} • Boss wins: ${state.bossWins}</p></section></aside></section><nav class="bottom-nav" aria-label="Primary mobile navigation"><a href="#home"><span>🏠</span>Home</a><a href="#quest"><span>⚔️</span>Quest</a><a href="#progress"><span>📈</span>Stats</a><a href="#rewards"><span>🎁</span>Loot</a></nav></main>`; }
 
 root.addEventListener('submit', (event) => { if (event.target.id === 'onboardingForm') { event.preventDefault(); submitOnboarding(event.target); } });
 root.addEventListener('click', (event) => { const day = event.target.closest('[data-day]'); if (day) { state.selectedDay = day.dataset.day; saveState(); render(); } if (event.target.matches('[data-action="generate"]')) { state.plan = generatePlan(state.profile); state.checked = {}; saveState(); render(); } if (event.target.matches('[data-action="complete"]')) completeWorkout(); if (event.target.matches('[data-action="dismiss"]')) { lastCompletion = null; render(); } if (event.target.matches('[data-action="reset"]')) resetOnboarding(); if (event.target.matches('[data-action="login"]')) claimLoginReward(); if (event.target.matches('[data-action="notify"]')) requestQuestNotifications(); const quest = event.target.closest('[data-quest]'); if (quest) toggleQuest(Number(quest.dataset.quest)); const buy = event.target.closest('[data-buy]'); if (buy) buyItem(buy.dataset.buy); });
