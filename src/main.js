@@ -43,15 +43,15 @@ const WEEKLY_CHALLENGES = [
 ];
 
 const GOALS = {
+  muscle: { label: 'Build Muscle', focus: 'Strength', icon: '💪' },
+  fatLoss: { label: 'Lose Fat', focus: 'Fat Burn', icon: '🔥' },
   strength: { label: 'Build Strength', focus: 'Strength', icon: '⚔️' },
-  endurance: { label: 'Boost Endurance', focus: 'Endurance', icon: '🏃' },
-  weightLoss: { label: 'Lose Weight', focus: 'Fat Burn', icon: '🔥' },
-  mobility: { label: 'Move Better', focus: 'Mobility', icon: '🌿' },
+  general: { label: 'General Fitness', focus: 'Endurance', icon: '🏃' },
 };
 const LEVELS = {
-  beginner: { label: 'Beginner Adventurer', sets: 2, intensity: 'steady pace', count: 4 },
-  intermediate: { label: 'Seasoned Squire', sets: 3, intensity: 'moderate intensity', count: 5 },
-  advanced: { label: 'Elite Guardian', sets: 4, intensity: 'heroic intensity', count: 6 },
+  beginner: { label: 'Beginner Adventurer' },
+  intermediate: { label: 'Seasoned Squire' },
+  advanced: { label: 'Elite Guardian' },
 };
 const AVATARS = ['🛡️', '🧙', '🥷', '🦊', '🐉', '🤖'];
 const CLASSES = ['Paladin', 'Ranger', 'Mage', 'Monk'];
@@ -80,15 +80,90 @@ const QUESTS = [
   ['Warm-up Ritual', 'Move for 5 minutes before the quest', 10],
   ['Protein Feast', 'Eat a protein-forward meal', 12],
 ];
-const EXERCISE_POOLS = {
-  Strength: [['Goblet Squat', 'controlled reps'], ['Push-ups', 'clean form'], ['Dumbbell Row', 'each side'], ['Romanian Deadlift', 'hinge focus'], ['Overhead Press', 'strong core'], ['Farmer Carry', '30 seconds']],
-  Endurance: [['Zone 2 Walk/Jog', 'minutes'], ['Bike Intervals', 'rounds'], ['Row Machine', 'meters'], ['Step-ups', 'total reps'], ['Mountain Climbers', 'seconds'], ['Plank', 'seconds']],
-  'Fat Burn': [['Incline Walk', 'minutes'], ['Kettlebell Swings', 'reps'], ['Squat to Press', 'reps'], ['Jump Rope', 'rounds'], ['Reverse Lunges', 'each side'], ['Dead Bug', 'reps']],
-  Mobility: [['Yoga Flow', 'minutes'], ['World’s Greatest Stretch', 'each side'], ['Glute Bridge', 'reps'], ['Bird Dog', 'each side'], ['Cossack Squat', 'each side'], ['Breathing Reset', 'minutes']],
+const WORKOUT_PROGRAM = {
+  Monday: {
+    title: 'Upper Body A',
+    focus: 'Strength',
+    theme: 'strength',
+    exercises: [
+      ['Chest Press Machine', '3', '10', 'Sit tall, keep your shoulder blades back, and press the handles forward with control.', 'Machine push-ups or lighter chest press.', 'Dumbbell bench press.'],
+      ['Lat Pulldown', '3', '10', 'Grip the bar just outside shoulder width and pull to your upper chest without leaning back hard.', 'Use a lighter weight or assisted band pulldown.', 'Assisted pull-ups or strict pull-ups.'],
+      ['Seated Row', '3', '10', 'Pull the handle toward your ribs, squeeze your shoulder blades, then return slowly.', 'Use a lighter cable row.', 'Single-arm cable row with a pause.'],
+      ['Dumbbell Shoulder Press', '3', '10', 'Start at shoulder height and press overhead while keeping your ribs down.', 'Seated machine shoulder press.', 'Standing dumbbell shoulder press.'],
+      ['Dumbbell Curl', '3', '12', 'Keep elbows near your sides and curl without swinging.', 'Cable curl with light weight.', 'Alternating incline dumbbell curl.'],
+      ['Tricep Pushdown', '3', '12', 'Pin elbows to your sides and press the rope or bar down until arms are straight.', 'Single-arm band pushdown.', 'Overhead cable tricep extension.'],
+    ],
+  },
+  Tuesday: {
+    title: 'Lower Body A',
+    focus: 'Strength',
+    theme: 'strength',
+    exercises: [
+      ['Leg Press', '4', '10', 'Place feet about shoulder width and lower the sled until knees bend comfortably, then press through mid-foot.', 'Bodyweight box squat.', 'Hack squat or heavier leg press.'],
+      ['Leg Curl', '3', '12', 'Curl smoothly, pause briefly, and lower the weight under control.', 'Stability ball hamstring curl.', 'Single-leg machine curl.'],
+      ['Leg Extension', '3', '12', 'Lift until knees are straight without locking hard, then lower slowly.', 'Terminal knee extensions with a band.', 'Single-leg leg extension.'],
+      ['Walking Lunges', '3', '10 each leg', 'Step forward, lower with control, and push through the front foot to stand tall.', 'Static split squat holding support.', 'Dumbbell walking lunges.'],
+      ['Calf Raises', '4', '15', 'Rise onto the balls of your feet, pause at the top, and lower fully.', 'Seated bodyweight calf raises.', 'Single-leg calf raises.'],
+    ],
+  },
+  Wednesday: {
+    title: 'Cardio + Core',
+    focus: 'Endurance',
+    theme: 'endurance',
+    exercises: [
+      ['Treadmill Walk', '1', '20 minutes', 'Walk at a pace where you can talk but still feel warm and focused.', 'Flat easy walk.', 'Incline walk or brisk walk.'],
+      ['Bicycle Crunches', '3', '20', 'Rotate your torso slowly and reach opposite elbow toward opposite knee.', 'Dead bug.', 'Slow bicycle crunch with a pause.'],
+      ['Plank', '3', '30 seconds', 'Brace your abs, squeeze glutes, and keep a straight line from shoulders to ankles.', 'Knee plank.', 'Long-lever plank.'],
+      ['Leg Raises', '3', '15', 'Keep your low back controlled as you raise and lower your legs.', 'Bent-knee reverse crunch.', 'Hanging knee raises.'],
+    ],
+  },
+  Thursday: {
+    title: 'Push Day',
+    focus: 'Strength',
+    theme: 'strength',
+    exercises: [
+      ['Bench Press', '3', '8', 'Keep feet planted, lower the bar to your mid-chest, and press up smoothly.', 'Chest press machine.', 'Paused bench press.'],
+      ['Incline Dumbbell Press', '3', '10', 'Press from upper-chest height while keeping wrists stacked over elbows.', 'Incline machine press.', 'Low-incline dumbbell press with slower tempo.'],
+      ['Shoulder Press', '3', '10', 'Press overhead with a braced core and lower to shoulder level.', 'Machine shoulder press.', 'Standing barbell overhead press.'],
+      ['Lateral Raises', '3', '12', 'Raise dumbbells to shoulder height with soft elbows and no shrugging.', 'Cable lateral raise with light weight.', 'Lean-away lateral raise.'],
+      ['Tricep Pushdown', '3', '12', 'Keep elbows still and finish each rep by straightening your arms.', 'Band pushdown.', 'Rope pushdown with a 2-second squeeze.'],
+    ],
+  },
+  Friday: {
+    title: 'Pull Day',
+    focus: 'Strength',
+    theme: 'strength',
+    exercises: [
+      ['Lat Pulldown', '3', '10', 'Pull your elbows down toward your ribs and control the return.', 'Light wide-grip pulldown.', 'Assisted pull-up.'],
+      ['Seated Row', '3', '10', 'Sit tall and row to your torso without yanking with your lower back.', 'Chest-supported machine row.', 'Single-arm dumbbell row.'],
+      ['Face Pulls', '3', '15', 'Pull the rope toward your face with elbows high and squeeze rear shoulders.', 'Band pull-aparts.', 'Cable face pull with external rotation.'],
+      ['Dumbbell Curl', '3', '12', 'Curl with palms up and keep your upper arms quiet.', 'Light cable curl.', 'Incline dumbbell curl.'],
+      ['Hammer Curl', '3', '12', 'Curl with thumbs up and control the weight down.', 'Alternating light hammer curl.', 'Cross-body hammer curl.'],
+    ],
+  },
+  Saturday: {
+    title: 'Legs + Conditioning',
+    focus: 'Fat Burn',
+    theme: 'fat-burn',
+    exercises: [
+      ['Leg Press', '4', '8', 'Use a strong but controlled press and avoid bouncing at the bottom.', 'Goblet squat to a box.', 'Heavier leg press.'],
+      ['Romanian Deadlift', '3', '10', 'Hinge at the hips, keep the weights close, and feel the stretch in hamstrings.', 'Dumbbell hip hinge practice.', 'Barbell Romanian deadlift.'],
+      ['Leg Curl', '3', '12', 'Curl, pause briefly, then lower slowly to train the hamstrings.', 'Stability ball leg curl.', 'Single-leg curl.'],
+      ['Calf Raises', '4', '15', 'Move through a full range of motion and pause at the top.', 'Bodyweight calf raises.', 'Weighted standing calf raises.'],
+      ['Incline Treadmill Walk', '1', '15 minutes', 'Walk uphill at a steady pace while keeping posture tall.', 'Flat treadmill walk.', 'Higher incline or faster pace.'],
+    ],
+  },
+  Sunday: {
+    title: 'Recovery',
+    focus: 'Mobility',
+    theme: 'mobility',
+    exercises: [
+      ['Stretching', '1', '15 minutes', 'Move through gentle full-body stretches and breathe slowly.', 'Short 5-minute mobility flow.', 'Longer yoga-style recovery flow.'],
+      ['Easy Walk', '1', '20 minutes', 'Keep the pace relaxed and use the walk to recover, not compete.', '10-minute easy walk.', '30-minute easy walk.'],
+    ],
+  },
 };
-const DAY_ARCS = {
-  Monday: ['Strength', 'Guild Initiation'], Tuesday: ['Endurance', 'Forest Run'], Wednesday: ['Mobility', 'Sanctuary Reset'], Thursday: ['Strength', 'Forge Trial'], Friday: ['Fat Burn', 'Arena Rush'], Saturday: ['Endurance', 'Dragon Chase'], Sunday: ['Mobility', 'Inn Recovery'],
-};
+const LEGACY_GOAL_MAP = { weightLoss: 'fatLoss', endurance: 'general', mobility: 'general' };
 const root = document.querySelector('#root');
 let lastCompletion = null;
 let state = normalizeState(loadState());
@@ -99,7 +174,8 @@ function normalizeState(saved = {}) {
   next.careerXp = { ...CAREER_XP, ...(next.careerXp || {}) };
   next.login = { lastClaim: '', streak: 0, boosts: 0, ...(next.login || {}) };
   next.notifications = { enabled: false, questHour: '08:00', ...(next.notifications || {}) }; next.rareAvatars = next.rareAvatars || {}; next.seasons = next.seasons || {}; next.penalties = next.penalties || {}; next.steps = next.steps || {}; next.water = next.water || {}; next.weightLog = next.weightLog || []; next.strengthLog = next.strengthLog || [];
-  if (!Object.keys(next.plan || {}).length) next.plan = generatePlan(next.profile);
+  next.profile.goal = LEGACY_GOAL_MAP[next.profile.goal] || next.profile.goal || 'general';
+  next.plan = generatePlan(next.profile);
   return next;
 }
 function loadState() { try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; } catch { return {}; } }
@@ -134,17 +210,34 @@ function historyEntries(s = state) {
   return [...new Map(entries.map((item) => [item.id || `${item.date}-${item.day}`, item])).values()];
 }
 function getStreak(s = state) { let count = 0; const cursor = new Date(); while (s.completedWorkouts[dateKey(cursor)]) { count++; cursor.setDate(cursor.getDate() - 1); } return count; }
-function goalFocus(profile = state.profile) { return GOALS[profile.goal]?.focus || 'Strength'; }
-function choose(pool, count) { return [...pool].sort(() => Math.random() - 0.5).slice(0, count); }
-function repText(base, level) { return base.includes('minutes') ? `${level.sets * 8}-${level.sets * 10} ${base}` : base.includes('seconds') ? `${level.sets * 20}-${level.sets * 30} ${base}` : `${level.sets} sets • ${level.intensity} • ${base}`; }
+function goalFocus(profile = state.profile) { return GOALS[profile.goal]?.focus || 'Endurance'; }
+function goalModifier(profile = state.profile) { return LEGACY_GOAL_MAP[profile.goal] || profile.goal || 'general'; }
+function restTime(goal = goalModifier()) {
+  if (goal === 'strength') return '2–3 minutes';
+  if (goal === 'fatLoss') return '45–60 seconds';
+  if (goal === 'muscle') return '60–90 seconds';
+  return '60–90 seconds';
+}
+function repsForGoal(baseReps, goal = goalModifier()) {
+  if (goal !== 'strength') return baseReps;
+  if (/minute|second|each leg/i.test(baseReps)) return baseReps;
+  return '5–8';
+}
+function goalCue(goal = goalModifier()) {
+  if (goal === 'muscle') return 'Goal: increase weight when all reps are completed.';
+  if (goal === 'fatLoss') return 'Goal: add 15 minutes cardio after this workout.';
+  if (goal === 'strength') return 'Goal: use lower reps with heavier, controlled sets.';
+  return 'Goal: keep the standard workout structure.';
+}
+function exerciseDetail([, sets, reps, instructions, easier, harder], profile = state.profile) {
+  const goal = goalModifier(profile);
+  return `Sets: ${sets} • Reps: ${repsForGoal(reps, goal)} • Rest: ${restTime(goal)} • Instructions: ${instructions} • Easier: ${easier} • Harder: ${harder} • ${goalCue(goal)}`;
+}
 function generatePlan(profile = state.profile) {
-  const focus = goalFocus(profile);
-  const level = LEVELS[profile.experience] || LEVELS.beginner;
   return Object.fromEntries(DAYS.map((day) => {
-    const [fallbackFocus, arc] = DAY_ARCS[day];
-    const dayFocus = day === 'Sunday' ? 'Mobility' : (day === 'Friday' ? 'Fat Burn' : (fallbackFocus === 'Strength' ? focus : fallbackFocus));
-    const exercises = choose(EXERCISE_POOLS[dayFocus], level.count).map(([name, detail]) => [name, repText(detail, level)]);
-    return [day, { title: `${arc}: ${dayFocus}`, focus: dayFocus, exercises, bossDamage: exercises.length * 10, theme: dayFocus.toLowerCase().replace(' ', '-') }];
+    const workout = WORKOUT_PROGRAM[day];
+    const exercises = workout.exercises.map((exercise) => [exercise[0], exerciseDetail(exercise, profile)]);
+    return [day, { title: workout.title, focus: workout.focus, exercises, bossDamage: exercises.length * 10, theme: workout.theme }];
   }));
 }
 function addRewards(xp, coins) { const old = getLevel(); state.xp += xp; state.coins += coins; state.lifetimeCoins += coins; return getLevel() > old; }
