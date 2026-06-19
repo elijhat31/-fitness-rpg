@@ -102,3 +102,26 @@ button:disabled, .complete-button:disabled { cursor: not-allowed; opacity: .45; 
 @media (max-width: 620px) { .stats-grid, .log-row, .login-track { grid-template-columns: 1fr; } }
 
 @media (max-width: 620px) { .dashboard { grid-template-columns: 1fr; } }
+
+.notification-panel { border-color: rgba(125, 255, 207, .36); background: linear-gradient(135deg, rgba(20, 70, 74, .9), rgba(34, 21, 67, .85)); }
+.notification-panel small { display: block; margin-top: 10px; }
+.penalty { padding: 10px 12px; border-radius: 14px; color: #ffd6d6; background: rgba(255, 92, 92, .14); border: 1px solid rgba(255, 92, 92, .28); }
+.season-panel { background: linear-gradient(135deg, rgba(105, 58, 183, .38), rgba(255, 157, 66, .12)); }
+.avatar-panel { overflow: hidden; }
+.rare-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 12px; }
+.rare-avatar { min-height: 96px; display: grid; place-items: center; text-align: center; padding: 12px; border-radius: 18px; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1); filter: grayscale(1); opacity: .56; }
+.rare-avatar span { font-size: 2rem; }
+.rare-avatar b { color: #fff1c2; }
+.rare-avatar.unlocked { filter: none; opacity: 1; border-color: rgba(255, 122, 217, .55); background: radial-gradient(circle at top, rgba(255,122,217,.22), rgba(125,255,207,.08)); box-shadow: inset 0 0 24px rgba(255,122,217,.08); }
+.reward-screen { position: relative; overflow: hidden; }
+.reward-screen::before { content: ''; position: absolute; inset: -40%; background: conic-gradient(from 90deg, transparent, rgba(255,224,138,.16), transparent, rgba(125,255,207,.14), transparent); animation: spinGlow 4s linear infinite; pointer-events: none; }
+.reward-screen > * { position: relative; z-index: 1; }
+.confetti { letter-spacing: .5rem; color: #ffe08a; text-align: center; animation: sparkleDrop 1.2s ease-in-out infinite alternate; }
+.chest-pop { display: grid; justify-items: center; gap: 5px; margin: 12px auto; max-width: 360px; padding: 18px; border-radius: 22px; color: #fff7d7; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.18); animation: chestPop .65s cubic-bezier(.2, 1.8, .4, 1) both; }
+.chest-pop span { font-size: 3.8rem; filter: drop-shadow(0 0 18px rgba(255,224,138,.7)); }
+.chest-pop small { color: #7dffcf; font-weight: 900; }
+.rare-unlock { padding: 12px; border-radius: 16px; background: rgba(255, 122, 217, .16); border: 1px solid rgba(255, 122, 217, .35); color: #fff1c2; font-weight: 900; text-align: center; }
+@keyframes spinGlow { to { transform: rotate(1turn); } }
+@keyframes sparkleDrop { from { opacity: .45; transform: translateY(-4px); } to { opacity: 1; transform: translateY(4px); } }
+@keyframes chestPop { 0% { opacity: 0; transform: scale(.35) rotate(-8deg); } 70% { transform: scale(1.08) rotate(3deg); } 100% { opacity: 1; transform: scale(1) rotate(0); } }
+@media (max-width: 620px) { .rare-grid { grid-template-columns: 1fr; } }
