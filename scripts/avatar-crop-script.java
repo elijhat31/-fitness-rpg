@@ -8,14 +8,15 @@ import java.util.Locale;
 import javax.imageio.ImageIO;
 
 /**
- * Crops the avatar sprite sheet into 72 JPG avatar files.
+ * Crops the avatar sprite sheet into 72 descriptively named JPG avatar files.
  *
  * Usage from the repository root:
  *   java scripts/avatar-crop-script.java
  *
  * The source image is expected to be a 12-column by 8-row sprite sheet. The
  * first 36 tiles are written to public/avatars/male, and the next 36 tiles are
- * written to public/avatars/female.
+ * written to public/avatars/female. Filenames use the app path format:
+ * class-rank.jpg, such as gladiator-novice.jpg.
  */
 class AvatarCropScript {
     private static final Path SOURCE_IMAGE = Path.of(
@@ -27,6 +28,12 @@ class AvatarCropScript {
     private static final int SPRITESHEET_ROWS = 8;
     private static final int AVATARS_PER_GENDER = 36;
     private static final int TOTAL_AVATARS = AVATARS_PER_GENDER * 2;
+    private static final String[] CLASSES = {
+            "gladiator", "shadow", "berserker", "paladin", "voidwalker", "ranger"
+    };
+    private static final String[] RANKS = {
+            "novice", "adventurer", "champion", "veteran", "mythic", "legend"
+    };
 
     public static void main(String[] args) throws IOException {
         BufferedImage spriteSheet = ImageIO.read(SOURCE_IMAGE.toFile());
@@ -59,8 +66,12 @@ class AvatarCropScript {
                     tileHeight);
 
             Path outputDir = index < AVATARS_PER_GENDER ? MALE_OUTPUT_DIR : FEMALE_OUTPUT_DIR;
-            int genderIndex = (index % AVATARS_PER_GENDER) + 1;
-            Path outputFile = outputDir.resolve(String.format(Locale.ROOT, "avatar-%02d.jpg", genderIndex));
+            int genderIndex = index % AVATARS_PER_GENDER;
+            Path outputFile = outputDir.resolve(String.format(
+                    Locale.ROOT,
+                    "%s-%s.jpg",
+                    CLASSES[genderIndex / RANKS.length],
+                    RANKS[genderIndex % RANKS.length]));
 
             if (!ImageIO.write(toJpgCompatibleImage(cropped), "jpg", outputFile.toFile())) {
                 throw new IOException("No ImageIO writer found for JPG output: " + outputFile);
